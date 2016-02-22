@@ -173,4 +173,13 @@ function save_student_meta($post_id, $post) {
     }
 }
 add_action('save_post', 'save_student_meta',1,2);
+
+/*add_action( 'init', 'blockusers_init' );
+function blockusers_init() {
+    if ( is_admin() && ! current_user_can( 'administrator' ) &&
+    ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+    wp_redirect( home_url() );
+    exit;
+    }
+}*/
 ?>
