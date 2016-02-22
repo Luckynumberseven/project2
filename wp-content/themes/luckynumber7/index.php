@@ -13,6 +13,9 @@
  * @subpackage Twenty_Sixteen
  * @since Twenty Sixteen 1.0
  */
+
+/*
+<?php
 get_header();
 
 		if( have_posts()) : 
@@ -42,4 +45,59 @@ endif;
 
 get_sidebar();
 get_footer();
+?>*/
+
+get_header()
+?>
+
+
+<div class="row ">
+	<div class="col-xs-12 page-head welcome">
+		<h1>Välkommen!</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 page-content">
+		<div class="row">
+			<div class="col-xs-9 ">
+				<div class="row">
+				
+					<div class="col-xs-12">
+						<div class="row">
+							<?php
+							if( have_posts()) : 
+								while( have_posts() ) : the_post();
+							?>
+									<h1 class="text-center"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+										<p><?php the_excerpt() ?></p>
+								<?php
+								endwhile;		
+							else : ?>
+								<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+							<?php 
+							endif; ?>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="col-xs-3 sidebar-area">
+				<?php
+				get_sidebar();
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<?php
+		get_footer();
 		?>
+	</div>
+</div>
+
+
+		

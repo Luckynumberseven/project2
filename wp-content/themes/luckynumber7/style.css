@@ -13,3 +13,24 @@ Text Domain: twentysixteen
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+
+.page-head {
+	padding: 20px;
+}
+.page-head p {
+	padding: 0 0px 0 0px;
+}
+.page-head h1{
+	font-size: 50px;
+}
+.welcome h1 {
+	margin: 20px;
+	text-align: center;
+}
+.front-page-area {
+	
+	margin-bottom: 30px;
+}
+.front-page-area h1 {
+	margin-top: 0;
+}

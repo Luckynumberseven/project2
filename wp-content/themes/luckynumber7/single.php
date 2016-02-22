@@ -5,7 +5,7 @@ if( have_posts()) :
 	while( have_posts() ) : the_post();
 ?>
 	<h1 class=""><?php the_title(); ?></h1>
-	<p class="">Publicerad av <?php the_author() ?> <?php the_time("Y:m:d H:m") ?></p>
+	<p class="">Publicerad av <a href="<?php the_author_link()?>"><?php the_author() ?> </a> <?php the_time("Y:m:d H:m") ?></p>
 	<?php the_content() ?>
 
 	<?php
