@@ -98,5 +98,15 @@ function modify_contact_methods($profile_fields) {
 
     return $profile_fields;
 }
+
 add_filter('user_contactmethods', 'modify_contact_methods');
-?>
+
+
+add_action( 'init', 'blockusers_init' );
+function blockusers_init() {
+    if ( is_admin() && ! current_user_can( 'administrator' ) &&
+    ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+    wp_redirect( home_url() );
+    exit;
+    }
+}
