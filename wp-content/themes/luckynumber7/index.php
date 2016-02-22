@@ -47,7 +47,11 @@ get_sidebar();
 get_footer();
 ?>*/
 
-get_header()
+get_header();
+
+
+
+
 ?>
 
 
@@ -56,8 +60,22 @@ get_header()
 		<h1>Välkommen!</h1>
 	</div>
 </div>
+
+
 <div class="row">
 	<div class="col-xs-12 page-content">
+
+
+<?php
+//If user is student, redirects to another landing page
+$user = wp_get_current_user();
+if ( in_array( 'subscriber', (array) $user->roles ) ) {
+    get_template_part('student_landing');
+}
+else {
+?>
+
+
 		<div class="row">
 			<div class="col-xs-9 ">
 				<div class="row">
@@ -81,6 +99,9 @@ get_header()
 					
 				</div>
 			</div>
+			<?php
+		}//ends else statement
+			?>
 
 			<div class="col-xs-3 sidebar-area">
 				<?php
