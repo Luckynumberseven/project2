@@ -21,7 +21,7 @@
 		<?php $user = wp_get_current_user();
 
 		if ( in_array( 'subscriber', (array) $user->roles ) ) {
-			show_admin_bar(FALSE);
+			
 		    get_template_part('student_landing');
 		}
 		

@@ -248,13 +248,23 @@ function modify_contact_methods($profile_fields) {
 
 add_filter('user_contactmethods', 'modify_contact_methods');
 
-
+################## Disables Dashboard for low-level users ############################
 add_action( 'init', 'blockusers_init' );
 function blockusers_init() {
     if ( is_admin() && ! current_user_can( 'edit_posts' ) &&
     ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
     wp_redirect( home_url() );
     exit;
+    }
+}
+
+################## Disables admin bar for low-level users ############################
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+    if (!current_user_can('edit_posts') && !is_admin()) {
+      show_admin_bar(false);
     }
 }
 

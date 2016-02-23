@@ -31,22 +31,22 @@ get_currentuserinfo();
 */
 ?>
 </div>
-<div class="entry-content" itemprop="articleBody">
-	<h1>Submit student report</h1>
+<div class="entry-content hentry" itemprop="articleBody">
+	<h1>Lämna en studie rapport</h1>
+	<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>
 
 	<?php		
 		echo'	
 			<form method="post" name="front_end" action="" >
 				<input type="text" name="title" placeholder="Report Title..." /><br>
 				<textarea cols="75" rows="15" name="content" placeholder="Report Content..."></textarea>
-				<input type="submit">
 				<input type="hidden" name="action" value="report" />
 				<input type="hidden" name="author" value="'.$user_id.'" />
-
+				<input type="submit" />
 			</form>';
 	?>
 
-	<h1>Previous reports</h1>
+	<h1>Tidigare rapporter</h1>
 	<?php
 	$reports = new WP_query(['post_type' => 'report', 'author' => $user_id]);
 
