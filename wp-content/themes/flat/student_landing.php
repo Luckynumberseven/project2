@@ -1,15 +1,17 @@
 <?php
 $user_id = get_current_user_id();
-//print_r(get_user_meta($user_id));
+
 global $current_user;
 get_currentuserinfo();
 ?>
+
 <?php flat_hook_index_before(); ?>
-<div id="content" class="site-content" role="main">
+<div id="content" class="site-content hentry" role="main">
 	<?php flat_hook_index_top(); ?>
 	<header class="entry-header">
 		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
 	</header>
+
 
 	<?php
 		

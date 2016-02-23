@@ -251,14 +251,14 @@ add_filter('user_contactmethods', 'modify_contact_methods');
 
 add_action( 'init', 'blockusers_init' );
 function blockusers_init() {
-    if ( is_admin() && ! current_user_can( 'administrator' ) &&
+    if ( is_admin() && ! current_user_can( 'edit_posts' ) &&
     ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
     wp_redirect( home_url() );
     exit;
     }
 }
 
-################################
+################ Handles Front-end posting of students study report ################
 
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "report") {
 
@@ -287,6 +287,32 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 }
 
+############ Login/Logout Redirects #################
+
+function my_login_redirect( $redirect_to, $request, $user ) {
+    //is there a user to check?
+    global $user;
+    if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+        //check for admins
+        if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles ) ) {
+            // redirect them to the default place
+            $redirect_to = "/wp-admin";
+            return $redirect_to;
+        }
+        else {
+            return home_url();
+        }
+    } else {
+        return $redirect_to;
+    }
+}
+
+add_filter( 'login_redirect', 'my_login_redirect', 10, 3 );
+
+function my_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
+    return $requested_redirect_to = "/";
+}
+add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
 
 
 /**
@@ -549,11 +575,7 @@ function flat_register_required_plugins()
         )
 
     );
-
-
     tgmpa($plugins, $config);
-
-
 }
 /**
  * Enhances "Read more..." links with Bootstrap button styling
