@@ -14,72 +14,24 @@
  * @since Twenty Sixteen 1.0
  */
 
-/*
-<?php
 get_header();
-
-		if( have_posts()) : 
-			while( have_posts() ) : the_post();
-		?>
-				<h1><?php the_title(); ?></h1>
-					<?php the_content() ?>
-			<?php
-			endwhile;		
-		else : ?>
-			<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-		<?php 
-		endif; 
-
-$courses = new WP_query(['post_type' => 'course']);
-
-if( $courses->have_posts() ) :
-		while($courses->have_posts() ) : $courses->the_post();
-		?>
-				<a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
-					<?php the_content() ?>
-			<?php
-			endwhile;	
-else :
-	Echo 'No posts';
-endif;	
-
-get_sidebar();
-get_footer();
-?>*/
-
-get_header();
-
-
-
 
 ?>
-
-
-<div class="row ">
-	<div class="col-xs-12 page-head welcome">
-		<h1>Välkommen!</h1>
-	</div>
-</div>
-
 
 <div class="row">
 	<div class="col-xs-12 page-content">
-
-
-<?php
-//If user is student, redirects to another landing page
-$user = wp_get_current_user();
-if ( in_array( 'subscriber', (array) $user->roles ) ) {
-    get_template_part('student_landing');
-}
-else {
-?>
-
-
+		<?php //If user is student, redirects to another landing page
+		$user = wp_get_current_user();
+		if ( in_array( 'subscriber', (array) $user->roles ) ) {
+		    get_template_part('student_landing');
+		}
+		else {
+		?>
 		<div class="row">
 			<div class="col-xs-9 ">
+				<h1>Index.php loopen</h1>
+
 				<div class="row">
-				
 					<div class="col-xs-12">
 						<div class="row">
 							<?php
@@ -95,12 +47,11 @@ else {
 							<?php 
 							endif; ?>
 						</div>
-					</div>
-					
+					</div>	
 				</div>
 			</div>
 			<?php
-		}//ends else statement
+			}//ends else statement
 			?>
 
 			<div class="col-xs-3 sidebar-area">
