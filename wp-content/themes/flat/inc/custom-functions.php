@@ -226,7 +226,7 @@ function blockusers_init() {
     }
 }
 
-#################### Handles creation of a student report ############
+################################
 
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "report") {
 
