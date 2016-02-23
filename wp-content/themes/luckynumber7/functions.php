@@ -41,9 +41,9 @@ function post_type_course_init() {
         'rewrite'            => array( 'slug' => 'course' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
-        'hierarchical'       => false,
+        'hierarchical'       => true,
         'menu_position'      => null,
-        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'page-attributes'),
 
     );
 
