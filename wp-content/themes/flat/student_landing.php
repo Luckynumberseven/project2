@@ -8,7 +8,7 @@ get_currentuserinfo();
 ?>
 
 <div class="row">
-	<div class="col-xs-9">
+	<div class="col-xs-9 hentry">
 		<h1>Welcome <?php echo $current_user->display_name ?></h1>
 
 	<?php
