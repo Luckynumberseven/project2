@@ -9,6 +9,7 @@
 			<div class="hentry">
 				<h3>Log in</h3>
 				<?php wp_login_form() ?>
+				<?php do_action( 'wordpress_social_login' ); ?> 
 			</div>
 		<?php
 		}
