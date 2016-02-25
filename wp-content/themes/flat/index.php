@@ -9,6 +9,7 @@
 			<div class="hentry">
 				<h3>Log in</h3>
 				<?php wp_login_form() ?>
+				<?php do_action( 'wordpress_social_login' ); ?> 
 			</div>
 		<?php
 		}
@@ -21,7 +22,7 @@
 		<?php $user = wp_get_current_user();
 
 		if ( in_array( 'subscriber', (array) $user->roles ) ) {
-			show_admin_bar(FALSE);
+			
 		    get_template_part('student_landing');
 		}
 		
