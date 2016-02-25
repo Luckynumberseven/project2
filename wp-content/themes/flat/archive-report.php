@@ -2,10 +2,6 @@
 	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 
-	<?php $user = wp_get_current_user();
-
-		if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles )  ) {
-		?>	
 			<?php if ( is_author() && get_the_author_meta( 'description' ) ) : ?>
 				<div class="author-info">
 					<div class="author-avatar">
@@ -24,25 +20,22 @@
 				<?php flat_hook_archive_top(); ?>
 			<?php if ( have_posts() ) : ?>
 				<?php while ( have_posts() ) : the_post(); ?>
-					<?php get_template_part( 'content', get_post_format() ); ?>
+					<?php 					
+						$user = wp_get_current_user();
+						$author = get_the_author_id();
+
+						if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles ) || $author == $user->ID ) :?>
+
+						<?php get_template_part( 'content', get_post_format() ); ?>
+						 
+						<?php endif ?>
 				<?php endwhile; ?>
-
-
-
-				
 				<?php the_posts_pagination( array( 'prev_text' => __( '<i class="fa fa-chevron-left"></i>', 'flat' ), 'next_text' => __( '<i class="fa fa-chevron-right"></i>', 'flat' ) ) ); ?>
 			<?php else : ?>
 				<?php get_template_part( 'content', 'none' ); ?>
 			<?php endif; ?>
 			<?php flat_hook_archive_bottom(); ?>
 	</div>
-
-		<?php }
-		else {
-			echo '<div class="hentry"><h3>You are not authorized for viewing this content</h3></div>';
-			}?>
-
-		
 
 	<?php flat_hook_archive_after(); ?>
 <?php get_footer(); ?>

@@ -304,7 +304,7 @@ function my_login_redirect( $redirect_to, $request, $user ) {
     global $user;
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
         //check for admins
-        if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles ) ) {
+        if ( in_array( 'teacher', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'school_administrator', $user->roles ) ) {
             // redirect them to the default place
             $redirect_to = "/wp-admin";
             return $redirect_to;

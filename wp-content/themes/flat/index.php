@@ -21,7 +21,7 @@
 
 		<?php $user = wp_get_current_user();
 
-		if ( in_array( 'subscriber', (array) $user->roles ) ) {
+		if ( in_array( 'student', (array) $user->roles ) ) {
 			
 		    get_template_part('student_landing');
 		}
