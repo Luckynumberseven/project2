@@ -4,13 +4,12 @@
 	<?php
 		the_post();
 		get_template_part( 'content', 'single' );
-		
 		$query = new WP_Query( array( 'post_type' => 'course','post_parent' => $post->ID ) );
 
 		if( $query->have_posts() ) :
 		?>
 			<div class="entry-content hentry" itemprop="articleBody">
-				<h4>Kursens delmoment</h4>
+				<h4 class="entry-title">Kursens delmoment</h4>
 				<hr>
 				<ul>
 				<?php
@@ -24,7 +23,6 @@
 			<?
 		endif;
 		wp_reset_postdata();
-
 	?>
 
 	<?php comments_template(); ?>
