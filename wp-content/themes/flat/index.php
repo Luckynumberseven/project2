@@ -2,8 +2,6 @@
 	<?php flat_hook_index_before(); ?>
 	<div id="content" class="site-content" role="main">
 		<?php flat_hook_index_top(); ?>
-
-
 		<?php
 		if( is_user_logged_in() == FALSE) { ?>
 			<div class="hentry">

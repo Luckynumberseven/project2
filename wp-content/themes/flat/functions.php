@@ -324,6 +324,38 @@ function my_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
 }
 add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
 
+################### Default Basic menu ###############################
+
+// Check if the menu exists
+$menu_name = 'Qlokare menu';
+$menu_exists = wp_get_nav_menu_object( $menu_name );
+
+// If it doesn't exist, let's create it.
+if( !$menu_exists){
+    $menu_id = wp_create_nav_menu($menu_name);
+
+    // Set up default menu items
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Home'),
+        'menu-item-classes' => 'home',
+        'menu-item-url' => home_url( '/' ), 
+        'menu-item-status' => 'publish'));
+
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Kurser'),
+        'menu-item-url' => home_url( '/course' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Studie Rapport'),
+        'menu-item-url' => home_url( '/report' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Inlämningar och Tentor'),
+        'menu-item-url' => home_url( '/components' ), 
+        'menu-item-status' => 'publish'));
+
+}
+
 
 /**
 *ends Custom function.php**********************
