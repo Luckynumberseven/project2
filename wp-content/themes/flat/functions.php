@@ -248,13 +248,23 @@ function modify_contact_methods($profile_fields) {
 
 add_filter('user_contactmethods', 'modify_contact_methods');
 
-
+################## Disables Dashboard for low-level users ############################
 add_action( 'init', 'blockusers_init' );
 function blockusers_init() {
     if ( is_admin() && ! current_user_can( 'edit_posts' ) &&
     ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
     wp_redirect( home_url() );
     exit;
+    }
+}
+
+################## Disables admin bar for low-level users ############################
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+    if (!current_user_can('edit_posts') && !is_admin()) {
+      show_admin_bar(false);
     }
 }
 
@@ -294,7 +304,7 @@ function my_login_redirect( $redirect_to, $request, $user ) {
     global $user;
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
         //check for admins
-        if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles ) ) {
+        if ( in_array( 'teacher', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'school_administrator', $user->roles ) ) {
             // redirect them to the default place
             $redirect_to = "/wp-admin";
             return $redirect_to;
@@ -313,6 +323,38 @@ function my_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
     return $requested_redirect_to = "/";
 }
 add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
+
+################### Default Basic menu ###############################
+
+// Check if the menu exists
+$menu_name = 'Qlokare menu';
+$menu_exists = wp_get_nav_menu_object( $menu_name );
+
+// If it doesn't exist, let's create it.
+if( !$menu_exists){
+    $menu_id = wp_create_nav_menu($menu_name);
+
+    // Set up default menu items
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Home'),
+        'menu-item-classes' => 'home',
+        'menu-item-url' => home_url( '/' ), 
+        'menu-item-status' => 'publish'));
+
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Kurser'),
+        'menu-item-url' => home_url( '/course' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Studie Rapport'),
+        'menu-item-url' => home_url( '/report' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Inlämningar och Tentor'),
+        'menu-item-url' => home_url( '/components' ), 
+        'menu-item-status' => 'publish'));
+
+}
 
 
 /**
