@@ -22,10 +22,10 @@
 			</div>
 			<?
 		endif;
+		
 		wp_reset_postdata();
+		comments_template(); 
 	?>
-
-	<?php comments_template(); ?>
 
 	</div>
 <?php get_footer(); ?>
