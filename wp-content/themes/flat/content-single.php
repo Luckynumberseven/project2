@@ -25,7 +25,6 @@ if ( get_the_author_meta( 'description' ) && empty( $single_author_box ) ) {
 		<?php flat_hook_entry_top(); ?>
 		<?php the_content( __( 'Continue reading', 'flat' ) ); ?>
 
-
 		<?php // If single is a file uploaded to teacher add message for posted before or after deadline
 			if( get_post_meta( $post->ID, 'in_time', true ) ) :
 				if( get_post_meta( $post->ID, 'in_time', true ) == 'yes' ) :
@@ -36,13 +35,12 @@ if ( get_the_author_meta( 'description' ) && empty( $single_author_box ) ) {
 				endif;
 			endif ?>
 
-
 		<?php 
 		if ( function_exists( 'cwppos_show_review' ) ) :
 			echo cwppos_show_review(); 
-			
 		endif;
 		?>
+
 		<?php wp_link_pages( array( 'before' => '<div class="page-links" itemprop="pagination"><span class="page-links-title">' . __( 'Pages:', 'flat' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 		<?php flat_hook_entry_bottom(); ?>
 	</div>

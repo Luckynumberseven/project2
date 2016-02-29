@@ -4,6 +4,13 @@ $user_id = get_current_user_id();
 global $current_user;
 get_currentuserinfo();
 ?>
+<?php //Get user group info, store group names in array
+	$groups_user = new Groups_User( get_current_user_id() );
+	$user_groups = $groups_user->groups;
+
+	foreach ($user_groups as $group ) {
+		$groups_name[] = $group->name;
+	}?>
 
 <?php flat_hook_index_before(); ?>
 <div id="content" class="site-content hentry" role="main">
@@ -12,7 +19,24 @@ get_currentuserinfo();
 		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
 	</header>
 
-<input type="text" name=value="<?php echo $current_user->display_name ?>">
+	<?php if ( have_posts() ) : ?> <!-- the loop -->
+			<?php while ( have_posts() ) : the_post(); ?>
+				
+				<?php //Get post categories, compare to user groups, print accordingly
+				$categories = get_the_category();
+
+				foreach($categories as $category) {
+						if ( in_array( $category->name, $groups_name ) ) {?>
+						<h3><a href="<?php the_permalink()?>"><?php the_title()?></a></h3>
+
+						<?php }
+					}?>
+
+
+			<?php endwhile; ?>
+	<?php endif ?>
+
+	
 	<?php
 				
 		      echo 'Username: ' . $current_user->user_login . "<br>";

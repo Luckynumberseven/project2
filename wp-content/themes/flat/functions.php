@@ -203,6 +203,12 @@ add_action( 'p2p_init', 'my_connection_types' );
 
 ######################## Taxonomies ################################
 
+add_action( 'init', 'add_category_taxonomy_to_course' );
+function add_category_taxonomy_to_course() {
+    register_taxonomy_for_object_type( 'category', 'course' );
+}
+
+/*
 //Creates the  taxonomy for our custom post type.
 
 function create_class_taxonomy() {
@@ -232,7 +238,7 @@ function create_class_taxonomy() {
     register_taxonomy( 'class', 'course', $args );
 }
 add_action( 'init', 'create_class_taxonomy' );
-
+*/
 ########################### Custom user fields ###################################
 
 
