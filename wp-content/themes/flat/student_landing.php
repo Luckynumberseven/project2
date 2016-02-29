@@ -18,6 +18,8 @@ get_currentuserinfo();
 	<header class="entry-header">
 		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
 	</header>
+<?php// echo do_shortcode('[groups_group_info group="Registered" show="users"]')?>
+
 
 	<?php if ( have_posts() ) : ?> <!-- the loop -->
 			<?php while ( have_posts() ) : the_post(); ?>

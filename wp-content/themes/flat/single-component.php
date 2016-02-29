@@ -1,8 +1,8 @@
 <?php get_header(); ?>
-			<div id="content" class="site-content hentry" role="main" itemscope itemtype="http://schema.org/Article">
+	<div id="content" class="site-content hentry" role="main" itemscope itemtype="http://schema.org/Article">
 			<?php
 			$parent_post = $post->ID; //Stores post-id for later use outside loop
-			
+	if ( is_user_logged_in() ):
 			while ( have_posts() ) : the_post();
 				get_template_part( 'content', 'single' );
 
@@ -21,8 +21,7 @@
 				if ( ! get_post_meta($post->ID, 'deadline', true) ) :
 					comments_template();
 				endif;
-			endwhile;
-			?>
+			endwhile;?>
 
 			<?php //If logged in user already uploaded, print link to upload or show all uploads if permitted by role
 			$user = wp_get_current_user();
@@ -77,5 +76,8 @@
 					<p>Deadline set to: <b>'.date('Y-m-d H:i:s', $deadline).'</b></p><p>'.$msg.'</p>
 				[/fu-upload-form]');?>
 			</div>
-
+	<?php
+	else :
+		echo 'Please log in to view content';
+	endif ?>
 <?php get_footer(); ?>
