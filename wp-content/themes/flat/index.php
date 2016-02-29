@@ -2,28 +2,19 @@
 	<?php flat_hook_index_before(); ?>
 	<div id="content" class="site-content" role="main">
 		<?php flat_hook_index_top(); ?>
-		<?php
-		if( is_user_logged_in() == FALSE) { ?>
-			<div class="hentry">
-				<h3>Log in</h3>
-				<?php wp_login_form() ?>
-				<?php do_action( 'wordpress_social_login' ); ?> 
-			</div>
-		<?php
-		}
-		elseif (is_user_logged_in() == TRUE ) { ?>
-			<a href="<?php echo wp_logout_url(); ?>"><button>Logout</button></a>
-		<?php
-		}
-		?>
 
+		<?php
+		if( is_user_logged_in() ) : ?>
+			<a href="<?php echo wp_logout_url(); ?>"><button>Logout</button></a>
+			
+		<?php
+		endif;
+		?>
 		<?php $user = wp_get_current_user();
 
 		if ( in_array( 'student', (array) $user->roles ) ) {
-			
 		    get_template_part('student_landing');
 		}
-		
 		else {
 		?>
 			<?php if ( have_posts() ) : ?> <!-- the loop -->

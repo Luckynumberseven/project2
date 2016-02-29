@@ -24,6 +24,19 @@ if ( get_the_author_meta( 'description' ) && empty( $single_author_box ) ) {
 	<div class="entry-content" itemprop="articleBody">
 		<?php flat_hook_entry_top(); ?>
 		<?php the_content( __( 'Continue reading', 'flat' ) ); ?>
+
+
+		<?php // If single is a file uploaded to teacher add message for posted before or after deadline
+			if( get_post_meta( $post->ID, 'in_time', true ) ) :
+				if( get_post_meta( $post->ID, 'in_time', true ) == 'yes' ) :
+					echo '<i class="fa fa-thumbs-up fa-2x" style="color: green"></i> <p>File was uploaded before deadline (see media > the file > edit more details in your dashboard for exact time).</p>';
+
+				elseif( get_post_meta( $post->ID, 'in_time', true ) == 'no' ) :
+					echo '<i class="fa fa-thumbs-down fa-2x" style="color: red"></i> <p>File was uploaded after deadline(see media > the file > edit more details in your dashboard for exact time).</p>';
+				endif;
+			endif ?>
+
+
 		<?php 
 		if ( function_exists( 'cwppos_show_review' ) ) :
 			echo cwppos_show_review(); 
