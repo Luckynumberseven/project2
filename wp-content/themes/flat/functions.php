@@ -178,7 +178,7 @@ function post_type_course_assignments_init() {
         'hierarchical'       => true,
         'menu_position'      => true,
         'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-        'register_meta_box_cb' => 'add_component_metabox'
+        'register_meta_box_cb' => 'add_assignment_metabox'
 
     );
 
@@ -351,19 +351,19 @@ if( !$menu_exists){
         'menu-item-status' => 'publish'));
     wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Inlämningar och Tentor'),
-        'menu-item-url' => home_url( '/component' ), 
+        'menu-item-url' => home_url( '/assignment' ), 
         'menu-item-status' => 'publish'));
 
 }
  ############### Meta ###########################
 
 // Adds the meta-box, called from register_post_type
-function add_component_metabox() {
-    add_meta_box('component_meta', 'Deadline', 'component_meta_fields', 'component', 'normal', 'high');
+function add_assignment_metabox() {
+    add_meta_box('assignment_meta', 'Deadline', 'assignment_meta_fields', 'assignment', 'normal', 'high');
 }
 
 // Adds content to our meta-box, called from add_meta_box
-function component_meta_fields() {
+function assignment_meta_fields() {
     global $post;
 ?>
     Deadline <input type="datetime-local" name="deadline" value="<?php echo get_post_meta($post->ID, 'deadline', true) ?>">
@@ -371,11 +371,11 @@ function component_meta_fields() {
 }
 
 //Handles saving values for our meta-data. Our POST values for each field is added to the array. Loop checks wether to update or insert new values
-function save_component_meta($post_id, $post) {
+function save_assignment_meta($post_id, $post) {
 
-    $component_meta['deadline'] = $_POST['deadline'];
+    $assignment_meta['deadline'] = $_POST['deadline'];
 
-    foreach($component_meta as $key => $value){
+    foreach($assignment_meta as $key => $value){
         if(get_post_meta($post->ID, $key, FALSE)){
             update_post_meta($post->ID, $key, $value); 
         }
@@ -384,7 +384,7 @@ function save_component_meta($post_id, $post) {
         }
     }
 }
-add_action('save_post', 'save_component_meta',1,2);
+add_action('save_post', 'save_assignment_meta',1,2);
 
 
 
