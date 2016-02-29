@@ -2,6 +2,8 @@
 	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 
+	<?php if( user_is_logged_in() ) : ?>	
+
 			<?php if ( is_author() && get_the_author_meta( 'description' ) ) : ?>
 				<div class="author-info">
 					<div class="author-avatar">
@@ -35,7 +37,12 @@
 				<?php get_template_part( 'content', 'none' ); ?>
 			<?php endif; ?>
 			<?php flat_hook_archive_bottom(); ?>
-	</div>
+			</div>
+		<?php else : ?>
+			<div id="content" class="site-content hentry" role="main">
+				<p>Please log in to view content</p>
+			</div>
+		<?php endif ?>
 
 	<?php flat_hook_archive_after(); ?>
 <?php get_footer(); ?>

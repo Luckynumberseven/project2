@@ -12,9 +12,9 @@ get_currentuserinfo();
 		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
 	</header>
 
-
+<input type="text" name=value="<?php echo $current_user->display_name ?>">
 	<?php
-		
+				
 		      echo 'Username: ' . $current_user->user_login . "<br>";
 		      echo 'User email: ' . $current_user->user_email . "<br>";
 		      echo 'User level: ' . $current_user->user_level . "<br>";
@@ -25,10 +25,6 @@ get_currentuserinfo();
 		      echo 'User Twitter: ' . $current_user->twitter . "<br>";
 		      echo 'User Facebook: ' . $current_user->facebook . "<br>";
 		      echo 'User Google+: ' . $current_user->gplus . "<br>";
-/*		      echo get_the_author_meta('twitter', $user_id);
-		      echo get_the_author_meta('facebook', $user_id);
-		      echo get_the_author_meta('gplus', $user_id);
-*/
 ?>
 </div>
 <div class="entry-content hentry" itemprop="articleBody">

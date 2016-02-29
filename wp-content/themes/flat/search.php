@@ -3,7 +3,7 @@
 	<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'flat' ), get_search_query() ); ?></h1>
 	<div id="content" class="site-content" role="main">
 		<?php flat_hook_search_top(); ?>
-
+<?php if( is_user_logged_in() ) : ?>
 	<?php if ( have_posts() ) : ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
@@ -17,4 +17,11 @@
 		<?php flat_hook_search_bottom(); ?>
 	</div>
 	<?php flat_hook_search_after(); ?>
+
+<?php else :?>
+	<div id="content" class="site-content hentry" role="main">
+		<p>Please log in to view content</p>
+	</div>
+<?php endif ?>
+
 <?php get_footer(); ?>
