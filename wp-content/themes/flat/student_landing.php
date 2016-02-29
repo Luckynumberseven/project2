@@ -11,11 +11,18 @@ get_currentuserinfo();
 	<header class="entry-header">
 		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
 	</header>
-
-<input type="text" name=value="<?php echo $current_user->display_name ?>">
+		<form>
+			Username: <input type="text" name="username" value="<?php echo $current_user->display_name ?>"><br>
+			Email: <input type="text" name="email" value="<?php echo $current_user->user_email ?>"><br>
+			Förnamn: <input type="text" name="firstname" value="<?php echo $current_user->user_firstname ?>"><br>
+			Efternamn: <input type="text" name="lastname" value="<?php echo $current_user->user_lastname ?>"><br>
+			Telefonnummer: <input type="text" name="phone" value="<?php echo $current_user->phone ?>"><br>
+			Om mig: <textarea type="text" name="about" value="<?php echo $current_user->description ?>"><?php echo $current_user->description ?></textarea><br>
+			<input type="submit" value="Spara">
+		</form>
 	<?php
-				
 		      echo 'Username: ' . $current_user->user_login . "<br>";
+		      echo 'Info: ' . $current_user->description . "<br>";
 		      echo 'User email: ' . $current_user->user_email . "<br>";
 		      echo 'User level: ' . $current_user->user_level . "<br>";
 		      echo 'User first name: ' . $current_user->user_firstname . "<br>";
@@ -26,7 +33,11 @@ get_currentuserinfo();
 		      echo 'User Facebook: ' . $current_user->facebook . "<br>";
 		      echo 'User Google+: ' . $current_user->gplus . "<br>";
 ?>
+	<form action="" method="post"> 
+		<input class="button" type="submit" name="custom" value="custom">
+	</form>
 </div>
+
 <div class="entry-content hentry" itemprop="articleBody">
 	<h1>Lämna en studie rapport</h1>
 	<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>

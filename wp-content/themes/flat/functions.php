@@ -242,6 +242,7 @@ function modify_contact_methods($profile_fields) {
     $profile_fields['twitter'] = 'Twitter Username';
     $profile_fields['facebook'] = 'Facebook URL';
     $profile_fields['gplus'] = 'Google+ URL';
+    $profile_fields['phone'] = 'Phonenumber';
 
     return $profile_fields;
 }
