@@ -16,10 +16,8 @@ get_currentuserinfo();
 <div id="content" class="site-content hentry" role="main">
 	<?php flat_hook_index_top(); ?>
 	<header class="entry-header">
-		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
+		<h2 class="entry-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h2>
 	</header>
-<?php// echo do_shortcode('[groups_group_info group="Registered" show="users"]')?>
-
 
 	<?php if ( have_posts() ) : ?> <!-- the loop -->
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -34,25 +32,26 @@ get_currentuserinfo();
 						<?php }
 					}?>
 
-
 			<?php endwhile; ?>
 	<?php endif ?>
 
-	
-	<?php
-				
-		      echo 'Username: ' . $current_user->user_login . "<br>";
-		      echo 'User email: ' . $current_user->user_email . "<br>";
-		      echo 'User level: ' . $current_user->user_level . "<br>";
-		      echo 'User first name: ' . $current_user->user_firstname . "<br>";
-		      echo 'User last name: ' . $current_user->user_lastname . "<br>";
-		      echo 'User display name: ' . $current_user->display_name . "<br>";
-		      echo 'User ID: ' . $current_user->ID . "<br>";
-		      echo 'User Twitter: ' . $current_user->twitter . "<br>";
-		      echo 'User Facebook: ' . $current_user->facebook . "<br>";
-		      echo 'User Google+: ' . $current_user->gplus . "<br>";
-?>
+	<div class="entry-content hentry">
+
+		Användarnamn: <?php echo $current_user->user_login ?> <br>
+		Email: <?php echo $current_user->user_email; ?> <br>
+		Förnamn: <?php echo $current_user->user_firstname; ?> <br>
+		Efternamn: <?php echo $current_user->user_lastname; ?> <br>
+		Om mig: <?php echo $current_user->description; ?> <br>
+		Twitter: <?php echo $current_user->twitter; ?><br>
+		Facebook: <?php echo $current_user->facebook; ?> <br>
+		Google+: <?php echo $current_user->gplus; ?> <br>
+
+		<form method="post" action="/edit-user/">
+			<input type="submit" class="button" value="Ändra dina uppgifter">
+		</form>
+	</div>
 </div>
+
 <div class="entry-content hentry" itemprop="articleBody">
 	<h1>Lämna en studie rapport</h1>
 	<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>
