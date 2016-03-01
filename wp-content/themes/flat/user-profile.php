@@ -61,7 +61,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 				<?php flat_hook_page_top(); ?>
 			<div id="content" class="site-content hentry" role="main">
 				<header class="entry-header">
-					<h1 class="entry-title" itemprop="name"> Ändra dina Personuppgifter: </h1>
+					<h3 class="entry-title" itemprop="name"> Ändra dina Personuppgifter: </h3>
 				</header>
 
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>

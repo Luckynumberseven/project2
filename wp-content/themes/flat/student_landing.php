@@ -9,33 +9,23 @@ get_currentuserinfo();
 <div id="content" class="site-content hentry" role="main">
 	<?php flat_hook_index_top(); ?>
 	<header class="entry-header">
-		<h1 class="entry-title" itemprop="name"> Welcome <?php echo $current_user->display_name ?></h1>
+		<h2 class="entry-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h2>
 	</header>
-		<form>
-			Username: <input type="text" name="username" value="<?php echo $current_user->display_name ?>"><br>
-			Email: <input type="text" name="email" value="<?php echo $current_user->user_email ?>"><br>
-			Förnamn: <input type="text" name="firstname" value="<?php echo $current_user->user_firstname ?>"><br>
-			Efternamn: <input type="text" name="lastname" value="<?php echo $current_user->user_lastname ?>"><br>
-			Telefonnummer: <input type="text" name="phone" value="<?php echo $current_user->phone ?>"><br>
-			Om mig: <textarea type="text" name="about" value="<?php echo $current_user->description ?>"><?php echo $current_user->description ?></textarea><br>
-			<input type="submit" value="Spara">
+	<div class="entry-content hentry">
+
+		Användarnamn: <?php echo $current_user->user_login ?> <br>
+		Email: <?php echo $current_user->user_email; ?> <br>
+		Förnamn: <?php echo $current_user->user_firstname; ?> <br>
+		Efternamn: <?php echo $current_user->user_lastname; ?> <br>
+		Om mig: <?php echo $current_user->description; ?> <br>
+		Twitter: <?php echo $current_user->twitter; ?><br>
+		Facebook: <?php echo $current_user->facebook; ?> <br>
+		Google+: <?php echo $current_user->gplus; ?> <br>
+
+		<form method="post" action="/edit-user/">
+			<input type="submit" class="button" value="Ändra dina uppgifter">
 		</form>
-	<?php
-		      echo 'Username: ' . $current_user->user_login . "<br>";
-		      echo 'Info: ' . $current_user->description . "<br>";
-		      echo 'User email: ' . $current_user->user_email . "<br>";
-		      echo 'User level: ' . $current_user->user_level . "<br>";
-		      echo 'User first name: ' . $current_user->user_firstname . "<br>";
-		      echo 'User last name: ' . $current_user->user_lastname . "<br>";
-		      echo 'User display name: ' . $current_user->display_name . "<br>";
-		      echo 'User ID: ' . $current_user->ID . "<br>";
-		      echo 'User Twitter: ' . $current_user->twitter . "<br>";
-		      echo 'User Facebook: ' . $current_user->facebook . "<br>";
-		      echo 'User Google+: ' . $current_user->gplus . "<br>";
-?>
-	<form action="" method="post"> 
-		<input class="button" type="submit" name="custom" value="custom">
-	</form>
+	</div>
 </div>
 
 <div class="entry-content hentry" itemprop="articleBody">
