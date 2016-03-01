@@ -12,54 +12,54 @@ get_currentuserinfo();
 		<h2 class="entry-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h2>
 	</header>
 	<div class="entry-content hentry">
-
-		Användarnamn: <?php echo $current_user->user_login ?> <br>
-		Email: <?php echo $current_user->user_email; ?> <br>
-		Förnamn: <?php echo $current_user->user_firstname; ?> <br>
-		Efternamn: <?php echo $current_user->user_lastname; ?> <br>
-		Om mig: <?php echo $current_user->description; ?> <br>
-		Twitter: <?php echo $current_user->twitter; ?><br>
-		Facebook: <?php echo $current_user->facebook; ?> <br>
-		Google+: <?php echo $current_user->gplus; ?> <br>
-
+		<h5>Användarnamn: <?php echo $current_user->user_login ?> </h5>
+		<h5>Email: <?php echo $current_user->user_email; ?> </h5>
+		<h5>Förnamn: <?php echo $current_user->user_firstname; ?> </h5>
+		<h5>Efternamn: <?php echo $current_user->user_lastname; ?> </h5>
+		<h5>Om mig: <?php echo $current_user->description; ?> </h5>
+		<h5>Twitter: <?php echo $current_user->twitter; ?> </h5>
+		<h5>Facebook: <?php echo $current_user->facebook; ?> </h5>
+		<h5>Google+: <?php echo $current_user->gplus; ?> </h5>
+		
 		<form method="post" action="/edit-user/">
 			<input type="submit" class="button" value="Ändra dina uppgifter">
 		</form>
 	</div>
-</div>
 
-<div class="entry-content hentry" itemprop="articleBody">
-	<h1>Lämna en studie rapport</h1>
-	<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>
 
-	<?php		
-		echo'	
-			<form method="post" name="front_end" action="" >
-				<input type="text" name="title" placeholder="Report Title..." /><br>
-				<textarea cols="75" rows="15" name="content" placeholder="Report Content..."></textarea>
-				<input type="hidden" name="action" value="report" />
-				<input type="hidden" name="author" value="'.$user_id.'" />
-				<input type="submit" />
-			</form>';
-	?>
+	<div class="entry-content hentry" itemprop="articleBody">
+		<h1>Lämna en studie rapport</h1>
+		<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>
 
-	<h1>Tidigare rapporter</h1>
-	<?php
-	$reports = new WP_query(['post_type' => 'report', 'author' => $user_id]);
+		<?php		
+			echo'	
+				<form method="post" name="front_end" action="" >
+					<input type="text" name="title" placeholder="Report Title..." /><br>
+					<textarea cols="75" rows="15" name="content" placeholder="Report Content..."></textarea>
+					<input type="hidden" name="action" value="report" />
+					<input type="hidden" name="author" value="'.$user_id.'" />
+					<input type="submit" />
+				</form>';
+		?>
 
-	if( $reports->have_posts() ) :
-			while($reports->have_posts() ) : $reports->the_post();
-			?>
-					<h4><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h4>
-					<p>Posted: <?php the_time("Y:m:d H:m") ?></p>
-						
-				<?php
-				endwhile;	
-	else :
-		Echo 'No posts';
-	endif;	
-	?>
-	<?php flat_hook_index_bottom(); ?>
+		<h1>Tidigare rapporter</h1>
+		<?php
+		$reports = new WP_query(['post_type' => 'report', 'author' => $user_id]);
+
+		if( $reports->have_posts() ) :
+				while($reports->have_posts() ) : $reports->the_post();
+				?>
+						<h4><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h4>
+						<p>Posted: <?php the_time("Y:m:d H:m") ?></p>
+							
+					<?php
+					endwhile;	
+		else :
+			Echo 'No posts';
+		endif;	
+		?>
+		<?php flat_hook_index_bottom(); ?>
+	</div>
 </div>
 	<?php flat_hook_index_after(); ?>
 <?php get_footer(); ?>

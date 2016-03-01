@@ -43,6 +43,8 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         update_user_meta($current_user->ID, 'last_name', esc_attr( $_POST['last-name'] ) );
     if ( !empty( $_POST['description'] ) )
         update_user_meta( $current_user->ID, 'description', esc_attr( $_POST['description'] ) );
+    if ( !empty( $_POST['phone'] ) )
+    	update_user_meta( $current_user->ID, 'phone', esc_attr( $_POST['phone']) );
 
     /* Redirect so the page will show updated info.*/
   /*I am not Author of this Code- i dont know why but it worked for me after changing below line to if ( count($error) == 0 ){ */
