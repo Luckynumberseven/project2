@@ -20,16 +20,9 @@ require get_template_directory() . '/inc/customize.php'; # Enables user customiz
 require get_template_directory() . '/inc/hooks.php'; # Enables user customization via WordPress plugin API
 require get_template_directory() . '/inc/template-tags.php'; # Contains functions that output HTML
 
-
-
-
 /**
 *Custom function.php**********************************
 */
-
-
-
-
 
 ######################## Custom post types ################################
 
@@ -135,7 +128,6 @@ function post_type_report_init() {
 
 add_action('init', 'post_type_report_init');
 
-
 function post_type_course_assignments_init() {
     //For dashboard view
     $labels = array(
@@ -188,7 +180,6 @@ function post_type_course_assignments_init() {
 
 add_action('init', 'post_type_course_assignments_init');
 
-
 function my_connection_types() {
     p2p_register_connection_type( array( 
         'name' => 'custom_post_manager',
@@ -200,7 +191,6 @@ function my_connection_types() {
 }
 add_action( 'p2p_init', 'my_connection_types' );
 
-
 ######################## Taxonomies ################################
 
 add_action( 'init', 'add_category_taxonomy_to_course' );
@@ -208,39 +198,12 @@ function add_category_taxonomy_to_course() {
     register_taxonomy_for_object_type( 'category', 'course' );
 }
 
-/*
-//Creates the  taxonomy for our custom post type.
-
-function create_class_taxonomy() {
-        $labels = array(
-        'name'              => 'Classes',
-        'singular_name'     => 'Class',
-        'search_items'      => 'Search Classes',
-        'all_items'         => 'All Classes',
-        'parent_item'       => 'Parent Class',
-        'parent_item_colon' => 'Parent Class:',
-        'edit_item'         => 'Edit Class',
-        'update_item'       => 'Update Class',
-        'add_new_item'      => 'Add New Class',
-        'new_item_name'     => 'New Class Name',
-        'menu_name'         => 'Class',
-    );
- 
-    $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'class' ),
-    );
- 
-    register_taxonomy( 'class', 'course', $args );
+add_action( 'init', 'add_category_taxonomy_to_assignment' );
+function add_category_taxonomy_to_assignment() {
+    register_taxonomy_for_object_type( 'category', 'assignment' );
 }
-add_action( 'init', 'create_class_taxonomy' );
-*/
-########################### Custom user fields ###################################
 
+########################### Custom user fields ###################################
 
 function modify_contact_methods($profile_fields) {
 
@@ -256,6 +219,7 @@ function modify_contact_methods($profile_fields) {
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 ################## Disables Dashboard for low-level users ############################
+
 add_action( 'init', 'blockusers_init' );
 function blockusers_init() {
     if ( is_admin() && ! current_user_can( 'edit_posts' ) &&
@@ -301,7 +265,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     //insert the the post into database by passing $new_post to wp_insert_post
     //store our post ID in a variable $pid
     $pid = wp_insert_post($new_post);
-
 }
 
 ############ Login/Logout Redirects #################
@@ -343,25 +306,25 @@ if( !$menu_exists){
 
     // Set up default menu items
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Home'),
+        'menu-item-title' =>  __('Hem'),
         'menu-item-classes' => 'home',
         'menu-item-url' => home_url( '/' ), 
         'menu-item-status' => 'publish'));
 
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Kurser'),
+        'menu-item-title' =>  __('Mina Kurser'),
         'menu-item-url' => home_url( '/course' ), 
         'menu-item-status' => 'publish'));
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Studie Rapport'),
+        'menu-item-title' =>  __('Mina Studierapporter'),
         'menu-item-url' => home_url( '/report' ), 
         'menu-item-status' => 'publish'));
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Inlämningar och Tentor'),
+        'menu-item-title' =>  __('Mina Inlämningar och Tentor'),
         'menu-item-url' => home_url( '/assignment' ), 
         'menu-item-status' => 'publish'));
-
 }
+
  ############### Meta ###########################
 
 // Adds the meta-box, called from register_post_type
@@ -377,7 +340,7 @@ function assignment_meta_fields() {
 <?php    
 }
 
-//Handles saving values for our meta-data. Our POST values for each field is added to the array. Loop checks wether to update or insert new values
+//Save values for meta-data. POST values for each field is added to the array. Loop checks wether to update or insert new values
 function save_assignment_meta($post_id, $post) {
 
     $assignment_meta['deadline'] = $_POST['deadline'];
@@ -393,12 +356,9 @@ function save_assignment_meta($post_id, $post) {
 }
 add_action('save_post', 'save_assignment_meta',1,2);
 
-
-
 /**
 *ends Custom function.php**********************
 */
-
 
 /**
  * Set the max width for embedded content
