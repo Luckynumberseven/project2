@@ -18,8 +18,17 @@
 								<?php wp_meta(); ?>
 							</ul>
 						</aside>
+						<aside id="primary" class="">
+							<?php if ( is_user_logged_in() ) : ?>
+							<a href="<?php echo wp_logout_url(); ?>"><button class="button">Logout</button></a>
+							<?php endif; ?>
+						</aside>
 
 <?php endif; ?>
 						<?php flat_hook_sidebar_bottom(); ?>
 					</div>
 <?php flat_hook_sidebar_after(); ?>
+
+
+
+

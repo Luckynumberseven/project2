@@ -3,13 +3,6 @@
 	<div id="content" class="site-content" role="main">
 		<?php flat_hook_index_top(); ?>
 
-		<?php
-		if( is_user_logged_in() ) : ?>
-			<a href="<?php echo wp_logout_url(); ?>"><button>Logout</button></a>
-			
-		<?php
-		endif;
-		?>
 		<?php $user = wp_get_current_user();
 		if ($_POST['custom']) :
 			get_template_part( 'student_custom');

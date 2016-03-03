@@ -44,6 +44,12 @@
 
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 							<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
+							<!-- fulhack på utlogning! -->
+							<ul class="nav-menu">
+								<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-108">
+									<a href="<?php echo wp_logout_url(); ?>">Logga ut</a>
+								</li>
+							</ul>
 						</nav>
 					<?php
 					else :?>
@@ -52,8 +58,10 @@
 								<li><a href="/">Home</a></li>
 								<li><a href="">Log In</a></li>
 							</ul> -->
-							<div style="padding: 20px;"><?php echo wp_login_form() ?></div>
-							<?php do_action( 'wordpress_social_login' ); ?>
+							<div class="widget sidebar-login-form">
+								<?php echo wp_login_form() ?>
+								<?php do_action( 'wordpress_social_login' ); ?>
+							</div>
 						</nav>
 					<?php
 					endif ?>
