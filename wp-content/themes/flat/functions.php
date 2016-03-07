@@ -319,10 +319,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     $pid = wp_insert_post($new_post);
 
     //insert data to custom fields
-    update_field('field_56d460469d39f', $question_1, $pid);
-    update_field('field_56d460809d3a0', $question_2, $pid);
-    update_field('field_56d460bf9d3a1', $question_3, $pid);
-    update_field('field_56d4169b00593', $rate, $pid);
+    update_field('field_56dd3f6c3c15c', $question_1, $pid);
+    update_field('field_56dd3f9d3c15d', $question_2, $pid);
+    update_field('field_56dd40903c15e', $question_3, $pid);
+    update_field('field_56dd40ae3c15f', $rate, $pid);
 }
 
 ################ Handles Front-end posting of students studieplan ################
@@ -384,12 +384,12 @@ add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
 ################### Default Basic nav menu ###############################
 
 // Check if the menu exists
-$menu_name = 'Qlokare menu';
-$menu_exists = wp_get_nav_menu_object( $menu_name );
+$qlok_menu = 'Qlokare menu';
+$qlok_menu_exists = wp_get_nav_menu_object( $qlok_menu );
 
 // If it doesn't exist, let's create it.
-if( !$menu_exists){
-    $menu_id = wp_create_nav_menu($menu_name);
+if( !$qlok_menu_exists){
+    $menu_id = wp_create_nav_menu($qlok_menu);
 
     // Set up default menu items
     wp_update_nav_menu_item($menu_id, 0, array(
@@ -407,8 +407,45 @@ if( !$menu_exists){
         'menu-item-url' => home_url( '/report' ), 
         'menu-item-status' => 'publish'));
     wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Min Studieplan'),
+        'menu-item-url' => home_url( '/plan' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Mina Inlämningar och Tentor'),
         'menu-item-url' => home_url( '/assignment' ), 
+        'menu-item-status' => 'publish'));
+}
+
+// Check if the menu exists
+$frontpage_menu = 'Frontpage menu';
+$frontpage_menu_exists = wp_get_nav_menu_object( $frontpage_menu );
+
+// If it doesn't exist, let's create it.
+if( !$frontpage_menu_exists){
+    $menu_id = wp_create_nav_menu($frontpage_menu);
+
+    // Set up default menu items
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Hem'),
+        'menu-item-classes' => 'home',
+        'menu-item-url' => home_url( '/' ), 
+        'menu-item-status' => 'publish'));
+
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Kurser'),
+        'menu-item-url' => home_url( '/course' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Utbildningens information'),
+        'menu-item-url' => home_url( '/' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Students'),
+        'menu-item-url' => home_url( '/students' ), 
+        'menu-item-status' => 'publish'));
+    wp_update_nav_menu_item($menu_id, 0, array(
+        'menu-item-title' =>  __('Login'),
+        'menu-item-url' => home_url( '/wp-login.php' ), 
         'menu-item-status' => 'publish'));
 }
 
