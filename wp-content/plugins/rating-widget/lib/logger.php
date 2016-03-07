@@ -16,7 +16,7 @@ class RWLogger
         $caller = array_shift( $bt );
         self::$_start = strpos( $caller['file'], '/plugins/rating-widget/' ) + strlen( '/plugins/rating-widget' );
         self::$_logger = rw_fs()->get_logger();
-        if ( is_admin() ) {
+        if ( is_admin() || WP_RW__DEBUG ) {
             self::$_logger->on();
         }
         if ( WP_RW__LOG_DUMP ) {

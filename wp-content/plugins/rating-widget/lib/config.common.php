@@ -48,18 +48,21 @@ if ( file_exists( dirname( __FILE__ ) . '/rw-config-custom.php' ) ) {
 	-----------------------------------------------------------------------------------------*/
 // To run your tests on a local machine, hardcode your IP here.
 // To find your IP go to http://www.ip-adress.com/
-
 if ( WP_RW__LOCALHOST ) {
-    define( 'WP_RW__SERVER_ADDR', '123.123.123.123' );
     define( 'WP_RW__CLIENT_ADDR', '123.123.123.123' );
 }
-
 /* Uncomment for debug mode.
 	-----------------------------------------------------------------------------------------*/
-define( 'WP_RW__DEBUG_PARAMS', false || !empty($_GET['rwdbge']) && 'true' === $_GET['rwdbge'] );
-define( 'WP_RW__DEBUG', WP_RW__DEBUG_PARAMS || false || !empty($_GET['rwdbg']) && 'true' === $_GET['rwdbg'] );
+if ( !defined( 'WP_RW__DEBUG_PARAMS' ) ) {
+    define( 'WP_RW__DEBUG_PARAMS', false || !empty($_GET['rwdbge']) && 'true' === $_GET['rwdbge'] );
+}
+if ( !defined( 'WP_RW__DEBUG' ) ) {
+    define( 'WP_RW__DEBUG', WP_RW__DEBUG_PARAMS || false || !empty($_GET['rwdbg']) && 'true' === $_GET['rwdbg'] );
+}
 define( 'WP_RW__SHOW_PHP_ERRORS', WP_RW__DEBUG );
-define( 'WP_RW__LOCALHOST_SCRIPTS', WP_RW__DEBUG && false );
+if ( !defined( 'WP_RW__LOCALHOST_SCRIPTS' ) ) {
+    define( 'WP_RW__LOCALHOST_SCRIPTS', WP_RW__DEBUG && false );
+}
 define( 'WP_RW__CACHING_ON', !WP_RW__DEBUG );
 define( 'WP_RW__STAGING', false );
 define( 'WP_RW__LOG_DUMP', WP_RW__DEBUG && !empty($_GET['rwdbge']) );
@@ -250,9 +253,6 @@ define( 'WP_RW__ADDRESS', 'http://' . WP_RW__DOMAIN );
 define( 'WP_RW__SECURE_ADDRESS', 'https://' . WP_RW__SECURE_DOMAIN );
 /* Server Address & Remote Address
 	-----------------------------------------------------------------------------------------*/
-if ( !defined( 'WP_RW__SERVER_ADDR' ) ) {
-    define( 'WP_RW__SERVER_ADDR', $_SERVER['SERVER_ADDR'] );
-}
 if ( !defined( 'WP_RW__CLIENT_ADDR' ) ) {
     define( 'WP_RW__CLIENT_ADDR', $_SERVER['REMOTE_ADDR'] );
 }

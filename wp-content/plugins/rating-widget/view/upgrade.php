@@ -61,7 +61,7 @@ echo  rw_fs()->get_upgrade_url() ;
 ?>
 "
 			   onclick="_gaq.push(['_trackEvent', 'upgrade', 'wordpress', 'gopro_button', 1, true]); _gaq.push(['_link', this.href]); return false;"
-			   class="button-primary gradient"><?php 
+			   class="button-secondary gradient rw-upgrade-button"><?php 
 _erw( 'learn-more' );
 ?>
 </a>

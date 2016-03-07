@@ -4,7 +4,7 @@
  * Plugin Name: Rating-Widget: Star Review System
  * Plugin URI:  http://rating-widget.com/wordpress-plugin/
  * Description: Create and manage Rating-Widget ratings in WordPress.
- * Version:     2.7.8.4
+ * Version:     2.7.9
  * Author:      Rating-Widget
  * Author URI:  http://rating-widget.com/wordpress-plugin/
  * License:     GPLv2
@@ -258,12 +258,9 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
             RWLogger::Log( 'WP_RW__ADDRESS', json_encode( WP_RW__ADDRESS ) );
             RWLogger::Log( 'WP_RW__SECURE_ADDRESS', json_encode( WP_RW__SECURE_ADDRESS ) );
             // Don't log secure data.
-            
             if ( is_admin() ) {
-                RWLogger::Log( 'WP_RW__SERVER_ADDR', WP_RW__SERVER_ADDR );
                 RWLogger::Log( 'WP_RW__DEBUG', json_encode( WP_RW__DEBUG ) );
             }
-        
         }
         
         private function setup_on_dashboard()
@@ -296,8 +293,18 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
         private function setup_dashboard_actions()
         {
             RWLogger::LogEnterence( 'setup_dashboard_actions' );
-            $this->fs->add_plugin_action_link( __rw( 'settings' ), rw_get_admin_url() );
-            $this->fs->add_plugin_action_link( __rw( 'blog' ), rw_get_site_url( '/blog/' ), true );
+            $this->fs->add_plugin_action_link(
+                __rw( 'settings' ),
+                rw_get_admin_url(),
+                false,
+                3
+            );
+            $this->fs->add_plugin_action_link(
+                __rw( 'blog' ),
+                rw_get_site_url( '/blog/' ),
+                true,
+                5
+            );
             
             if ( $this->account->is_registered() ) {
                 add_action( 'wp_ajax_rw-toprated-popup-html', array( &$this, 'generate_toprated_popup_html' ) );
@@ -1455,7 +1462,7 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
         
         public function ApiAccessBlockedNotice()
         {
-            $this->Notice( 'Oops... your server (IP ' . WP_RW__SERVER_ADDR . ') is blocking the access to our API, therefore your license can NOT be synced. <br>Please contact your host to enable remote access to: <ul><li><code><a href="' . RW_API__ADDRESS . '" target="_blank">' . RW_API__ADDRESS . '</a></code></li><li><code><a href="' . WP_RW__ADDRESS . '" target="_blank">' . WP_RW__ADDRESS . '</a></code></li><li><code><a href="' . WP_RW__SECURE_ADDRESS . '" target="_blank">' . WP_RW__SECURE_ADDRESS . '</a></code></li></ul>' );
+            $this->Notice( 'Oops... your server is blocking the access to our API, therefore your license can NOT be synced. <br>Please contact your host to enable remote access to: <ul><li><code><a href="' . RW_API__ADDRESS . '" target="_blank">' . RW_API__ADDRESS . '</a></code></li><li><code><a href="' . WP_RW__ADDRESS . '" target="_blank">' . WP_RW__ADDRESS . '</a></code></li><li><code><a href="' . WP_RW__SECURE_ADDRESS . '" target="_blank">' . WP_RW__SECURE_ADDRESS . '</a></code></li></ul>' );
         }
         
         public function ApiUnauthorizedAccessNotice()
@@ -2021,24 +2028,6 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
             if ( RWLogger::IsOn() ) {
                 $params = func_get_args();
                 RWLogger::LogEnterence( 'GenerateToken', $params, true );
-            }
-            
-            $ip = ( !$pServerCall ? WP_RW__CLIENT_ADDR : WP_RW__SERVER_ADDR );
-            
-            if ( $pServerCall ) {
-                
-                if ( RWLogger::IsOn() ) {
-                    RWLogger::Log( 'ServerToken', 'ServerToken' );
-                    RWLogger::Log( 'ServerIP', $ip );
-                }
-            
-            } else {
-                
-                if ( RWLogger::IsOn() ) {
-                    RWLogger::Log( 'ClientToken', 'ClientToken' );
-                    RWLogger::Log( 'ClientIP', $ip );
-                }
-            
             }
             
             $token = md5( $pTimestamp . $this->account->site_secret_key );
@@ -6574,9 +6563,6 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
                 $public_key = 'pk_d859cee50e9d63917b6d3f324cbaf';
             }
             
-            if ( file_exists( WP_RW__PLUGIN_LIB_DIR . 'freemius-keys.php' ) ) {
-                require_once WP_RW__PLUGIN_LIB_DIR . 'freemius-keys.php';
-            }
             $rw_fs = fs_dynamic_init( array(
                 'id'               => $id,
                 'public_key'       => $public_key,
@@ -6587,6 +6573,12 @@ if ( !class_exists( 'RatingWidgetPlugin' ) ) {
                 'has_addons'       => true,
                 'has_paid_plans'   => true,
                 'enable_anonymous' => false,
+                'menu'             => array(
+                'slug' => 'rating-widget',
+            ),
+                'permissions'      => array(
+                'newsletter' => true,
+            ),
             ) );
         }
         
