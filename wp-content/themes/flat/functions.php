@@ -118,7 +118,7 @@ function post_type_report_init() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => null,
-        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields'),
 
     );
 
@@ -152,9 +152,9 @@ function post_type_course_assignments_init() {
             'archives'              => _x( 'Assignment archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
             'insert_into_item'      => 'Insert into Assignment',//_x( 'Insert into Assignment', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
             'uploaded_to_this_item' => _x( 'Uploaded to this Assignment', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
-            'filter_items_list'     => _x( 'Filter Courses list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
-            'items_list_navigation' => _x( 'Courses list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
-            'items_list'            => _x( 'Courses list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain' ),
+            'filter_items_list'     => _x( 'Filter Assignments list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
+            'items_list_navigation' => _x( 'Assignments list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
+            'items_list'            => _x( 'Assignments list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain' ),
         );
     //Arguments for our new post type
     $args = array(
@@ -179,6 +179,56 @@ function post_type_course_assignments_init() {
 }
 
 add_action('init', 'post_type_course_assignments_init');
+
+function post_type_plan_init() {
+    //For dashboard view
+    $labels = array(
+            'name'                  => "Plan",
+            'singular_name'         => "Plan",
+            'menu_name'             => "Plan",
+            'name_admin_bar'        => "Plan",
+            'add_new'               => __( 'Add New', 'textdomain' ),
+            'add_new_item'          => __( 'Add New Plan', 'textdomain' ),
+            'new_item'              => __( 'New Plan', 'textdomain' ),
+            'edit_item'             => __( 'Edit Plan', 'textdomain' ),
+            'view_item'             => __( 'View Plan', 'textdomain' ),
+            'all_items'             => __( 'All Plans', 'textdomain' ),
+            'search_items'          => __( 'Search Plans', 'textdomain' ),
+            'parent_item_colon'     => __( 'Parent Plan:', 'textdomain' ),
+            'not_found'             => __( 'No Plan found.', 'textdomain' ),
+            'not_found_in_trash'    => __( 'No Plan found in Trash.', 'textdomain' ),
+            'featured_image'        => _x( 'Plan Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain' ),
+            'set_featured_image'    => _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+            'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+            'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+            'archives'              => _x( 'Plan archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
+            'insert_into_item'      => 'Insert into Plan',//_x( 'Insert into Plan', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+            'uploaded_to_this_item' => _x( 'Uploaded to this Plan', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
+            'filter_items_list'     => _x( 'Filter Plans list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
+            'items_list_navigation' => _x( 'Plans list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
+            'items_list'            => _x( 'Plans list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain' ),
+        );
+    //Arguments for our new post type
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'plan' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => true,
+        'menu_position'      => true,
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments')
+    );
+
+    // Registers our custom post type with above arguments
+    register_post_type('plan', $args);
+}
+
+add_action('init', 'post_type_plan_init');
 
 function my_connection_types() {
     p2p_register_connection_type( array( 
@@ -246,17 +296,19 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     //store post vars into variables for later use
     //now would be a good time to run some basic error checking/validation
     //to ensure that data for these values have been set
-    $title     = wp_strip_all_tags($_POST['title']);
-    $content   = wp_strip_all_tags($_POST['content']);
-    $post_type = 'report';
-    $author = $_POST['author'];
+    $title      = wp_strip_all_tags($_POST['title']);
+    $question_1 = wp_strip_all_tags($_POST['question_1']);
+    $question_2 = wp_strip_all_tags($_POST['question_2']);
+    $question_3 = wp_strip_all_tags($_POST['question_3']);
+    $rate       = wp_strip_all_tags($_POST['rate']);
+    $post_type  = 'report';
+    $author     = $_POST['author'];
 
     //sanitize_text_field($title) osv.      
 
     //the array of arguements to be inserted with wp_insert_post
     $new_post = array(
     'post_title'    => $title,
-    'post_content'  => $content,
     'post_status'   => 'publish',          
     'post_type'     => $post_type,
     'post_author' => $author
@@ -265,6 +317,41 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     //insert the the post into database by passing $new_post to wp_insert_post
     //store our post ID in a variable $pid
     $pid = wp_insert_post($new_post);
+
+    //insert data to custom fields
+    update_field('field_56d460469d39f', $question_1, $pid);
+    update_field('field_56d460809d3a0', $question_2, $pid);
+    update_field('field_56d460bf9d3a1', $question_3, $pid);
+    update_field('field_56d4169b00593', $rate, $pid);
+}
+
+################ Handles Front-end posting of students studieplan ################
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
+
+    //store our post vars into variables for later use
+    //now would be a good time to run some basic error checking/validation
+    //to ensure that data for these values have been set
+    $title      = $_POST['author_nickname'].'s studieplan';
+    $plan       = wp_strip_all_tags($_POST['plan']);
+    $post_type  = 'plan';
+    $author     = $_POST['author'];
+
+      
+
+    //the array of arguements to be inserted with wp_insert_post
+    $new_post = array(
+    'post_title'    => $title,
+    'post_content'  => $plan,
+    'post_status'   => 'publish',          
+    'post_type'     => $post_type,
+    'post_author'   => $author
+    );
+
+    //insert the the post into database by passing $new_post to wp_insert_post
+    //store our post ID in a variable $pid
+    $pid = wp_insert_post($new_post);
+
 }
 
 ############ Login/Logout Redirects #################
@@ -623,3 +710,11 @@ function flat_register_required_plugins()
 function modify_read_more_link() {
 	return '<a class="btn btn-default btn-sm" href="' . esc_url( get_permalink() ) . '">' . sprintf( __( 'Continue reading %s', 'flat' ), '<i class="fa fa-angle-double-right"></i></a>' );
 }
+
+//Customize Wordpress logo on login-page
+function custom_login_logo() {
+    echo '<style type="text/css">
+    h1 a { background-image: url('.get_bloginfo('template_directory').'/images/qlok-logo.jpg) !important; }
+    </style>';
+}
+add_action('login_head', 'custom_login_logo');

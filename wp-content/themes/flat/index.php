@@ -27,7 +27,9 @@
 					<?php endwhile; ?>
 
 				<?php else:?>
-						<p>Here goes content for not logged in users!!</p>
+						<div class="hentry">
+							<?php get_template_part('inlogged'); ?>
+						</div>
 				<?php endif ?>
 
 			<?php the_posts_pagination( array( 'prev_text' => __( '<i class="fa fa-chevron-left"></i>', 'flat' ), 'next_text' => __( '<i class="fa fa-chevron-right"></i>', 'flat' ) ) ); ?>

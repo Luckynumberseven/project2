@@ -48,12 +48,9 @@
 					<?php
 					else :?>
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-							<!-- <ul class="nav-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="">Log In</a></li>
-							</ul> -->
-							<div style="padding: 20px;"><?php echo wp_login_form() ?></div>
-							<?php do_action( 'wordpress_social_login' ); ?>
+							<?php wp_nav_menu( array(
+							    'menu' => 'Qlokare menu'
+							) ); ?>
 						</nav>
 					<?php
 					endif ?>
