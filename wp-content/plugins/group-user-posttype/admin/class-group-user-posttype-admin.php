@@ -110,7 +110,8 @@ class Group_User_Posttype_Admin {
      *        Administration Menus: http://codex.wordpress.org/Administration_Menus
      *
      */
-    add_options_page( 'Group_User_Posttype Relationship Manager', 'Group-User-Posttype', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
+    #add_menu_page( 'Custom plugin', 'Click me', $capability, $menu_slug, $function, $icon_url, $position );
+    add_menu_page( 'Class manager', 'Classes', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page'), '', '35'
     );
 	}
 
@@ -140,5 +141,7 @@ class Group_User_Posttype_Admin {
 	public function display_plugin_setup_page() {
 	    include_once( 'partials/group-user-posttype-admin-display.php' );
 	}
+
+	
 
 }

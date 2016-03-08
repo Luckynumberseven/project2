@@ -72,4 +72,5 @@ function run_group_user_posttype() {
 	$plugin->run();
 
 }
+
 run_group_user_posttype();
