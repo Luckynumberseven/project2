@@ -11,24 +11,11 @@ global $current_user, $wp_roles;
 
 $error = array();    
 
-	/*
- 		if ( wp_check_password( $_POST['pass-old'], $current_user->user_pass ) == TRUE ) {
-			echo "TRUE<br>
-				TRUE<br>
-				TRUE<br>";
-			}else{
-			echo "FALSE<br>
-			FALSE<br>
-			FALSE<br>";
-			}
-	*/
-
-
-/* If profile was saved, update profile. */
+/* If profile was saved and old password correct, update profile. */
 	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' && wp_check_password( $_POST['pass-old'], $current_user->user_pass ) == TRUE ) {
-		
+
 	    /* Update user password. */
-	    
+
 	    if ( !empty($_POST['pass1'] ) && !empty( $_POST['pass2'] ) ) {
 	        if ( $_POST['pass1'] == $_POST['pass2'] )
 	            wp_update_user( array( 'ID' => $current_user->ID, 'user_pass' => esc_attr( $_POST['pass1'] ) ) );

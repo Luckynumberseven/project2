@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
-
+<?php
+if ( is_user_logged_in() ): ?>
 	<div id="content" class="site-content" role="main" itemscope itemtype="http://schema.org/Article">
 		<?php
 		while ( have_posts() ) : the_post();
@@ -9,21 +10,21 @@
 			
 			//Checks if logged in user has the right role or is the author for this report
 			if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles )  || $author == $user->ID) {
-				
 				get_template_part( 'content', 'single' );
-
+				$fields = get_field_objects();
+				if( $fields )
+				{
+					foreach( $fields as $field_name => $field )
+					{
+						echo '<div>';
+							echo '<h3>' . $field['label'] . '</h3>';
+							echo $field['value'];
+						echo '</div>';
+					}
+				}
 			//Displays navigation for selected roles only.
 			if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles )) {
 
-				the_post_navigation( array(
-					'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Next', 'flat' ) . '</span> ' .
-						'<span class="screen-reader-text">' . esc_html__( 'Next post:', 'flat' ) . '</span> ' .
-						'<span class="post-title">%title</span>',
-					'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Previous', 'flat' ) . '</span> ' .
-						'<span class="screen-reader-text">' . esc_html__( 'Previous post:', 'flat' ) . '</span> ' .
-						'<span class="post-title">%title</span>',
-					) 
-				);
 			}
 			comments_template();
 			}
@@ -36,4 +37,10 @@
 		endwhile;
 			?>
 	</div>
+<?php 
+else:
+	echo '<div class="hentry">
+			<h3>Please log in to view content</h3>
+		</div>';
+endif ?>
 <?php get_footer(); ?>
