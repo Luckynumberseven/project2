@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 	<?php flat_hook_index_before(); ?>
-	<div id="content" class="site-content" role="main">
+	<div id="content" class="site-content xx" role="main">
 		<?php flat_hook_index_top(); ?>
 		<?php $user = wp_get_current_user();
 		if ($_POST['custom']) :

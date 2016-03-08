@@ -13,6 +13,12 @@ Tags: black, orange, white, white, dark, light, two-columns, responsive-layout, 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+.bio{
+	position: relative;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
 .floatleft{
 	float: left;
 }

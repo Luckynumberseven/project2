@@ -10,15 +10,13 @@ $user_groups = $groups_user->groups;
 	foreach ($user_groups as $group ) {
 		$groups_name[] = $group->name;
 }?>
+	<h1 class="page-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h1>
 
-<?php get_header(); ?>
-	<?php flat_hook_index_before(); ?>
-		<div id="content" class="site-content hentry" role="main">
-			<?php flat_hook_index_top(); ?>
-			<header class="entry-header">
-				<h2 class="entry-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h2>
-			</header>
-			<div class="entry-content hentry">
+		<?php flat_hook_entry_before(); ?>
+
+		<div class="entry-content" itemprop="articleBody">
+			<p class="bio">
+				<?php flat_hook_entry_top(); ?>
 				<div class="author-info">
 					<div class="author-avatar floatleft">
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'flat_author_bio_avatar_size', 100 ) ); ?>
@@ -39,8 +37,9 @@ $user_groups = $groups_user->groups;
 						</p>
 					</div>
 				</div>
-			</div>
-			<div class="entry-content hentry">
+			</p>
+
+			<p class="">
 				<h2>Senaste inlägg från din lärare:</h2>
 				<?php if ( have_posts() ) : ?> <!-- the loop -->
 					<?php while ( have_posts() ) : the_post(); ?>
@@ -57,9 +56,9 @@ $user_groups = $groups_user->groups;
 
 					<?php endwhile; ?>
 				<?php endif ?>
-			</div>
+			</p>
 
-			<div class="entry-content hentry" itemprop="articleBody">
+			<div class="">
 				<?php $plan = new WP_query(['post_type' => 'plan', 'author' => $user_id]);
 				if( $plan->have_posts() ) : $plan->the_post(); ?>
 					<h1><a href='<?php the_permalink(); ?>'>Min studieplan</a></h1>
@@ -70,16 +69,16 @@ $user_groups = $groups_user->groups;
 					<form method="post" name="front_end" action="" >
 						<textarea cols="75" rows="15" name="plan" placeholder="Dina mål..." required></textarea><br>
 						<input type="hidden" name="action" value="plan" />
-						<input type="hidden" name="author" value="<?php $user_id ?>" />
-						<input type="hidden" name="author_nickname" value="<?php $current_user->user_login ?>" />
+						<input type="hidden" name="author" value="<?php echo $user_id ?>" />
+						<input type="hidden" name="author_nickname" value="<?php echo $current_user->user_login ?>" />
 						<input type="submit" />
 					</form>
 				</p>
 				<?php endif;?>
 			</div>
-
-		<?php flat_hook_index_bottom(); ?>
+			<?php flat_hook_entry_bottom(); ?>
 		</div>
+	<?php flat_hook_entry_after(); ?>
 
-	<?php flat_hook_index_after(); ?>
-<?php get_footer(); ?>
+
+
