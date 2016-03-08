@@ -43,17 +43,12 @@
 						endif ?>
 
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-							<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
+							<?php wp_nav_menu( array( 'menu' => 'Qlokare menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
 						</nav>
 					<?php
 					else :?>
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-							<!-- <ul class="nav-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="">Log In</a></li>
-							</ul> -->
-							<div style="padding: 20px;"><?php echo wp_login_form() ?></div>
-							<?php do_action( 'wordpress_social_login' ); ?>
+							<?php wp_nav_menu( array( 'menu' => 'Frontpage menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
 						</nav>
 					<?php
 					endif ?>

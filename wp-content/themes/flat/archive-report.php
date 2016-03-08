@@ -20,23 +20,24 @@
 
 			<div id="content" class="site-content" role="main">
 				<?php flat_hook_archive_top(); ?>
-			<?php if ( have_posts() ) : ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-					<?php 					
-						$user = wp_get_current_user();
-						$author = get_the_author_id();
 
-						if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles ) || $author == $user->ID ) :?>
+				<?php if ( have_posts() ) : 
+						while ( have_posts() ) : the_post(); 					
+							$user = wp_get_current_user();
+							$author = get_the_author_id();
 
-						<?php get_template_part( 'content', get_post_format() ); ?>
-						 
-						<?php endif ?>
-				<?php endwhile; ?>
-				<?php the_posts_pagination( array( 'prev_text' => __( '<i class="fa fa-chevron-left"></i>', 'flat' ), 'next_text' => __( '<i class="fa fa-chevron-right"></i>', 'flat' ) ) ); ?>
-			<?php else : ?>
-				<?php get_template_part( 'content', 'none' ); ?>
-			<?php endif; ?>
-			<?php flat_hook_archive_bottom(); ?>
+							//Shows all courses if logged in has permitted role or is author of report
+							if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles ) || $author == $user->ID ) :
+								get_template_part( 'content', get_post_format() ); 
+							 
+							endif;
+						endwhile; ?>
+
+					<?php/* the_posts_pagination( array( 'prev_text' => __( '<i class="fa fa-chevron-left"></i>', 'flat' ), 'next_text' => __( '<i class="fa fa-chevron-right"></i>', 'flat' ) ) ); */?>
+				<?php else : ?>
+					<?php get_template_part( 'content', 'none' ); ?>
+				<?php endif; ?>
+				<?php flat_hook_archive_bottom(); ?>
 			</div>
 		<?php else : ?>
 			<div id="content" class="site-content hentry" role="main">

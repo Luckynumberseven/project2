@@ -16,3 +16,54 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .sticky {}
 .bypostauthor {}
+.studieplan {
+	text-align: center;
+	font-size: 48px;
+	padding-top: 80px;
+}
+.type-plan {
+	padding-top: 0px;
+}
+article.type-report {
+	padding-bottom: 0;
+}
+.site-content {
+	padding-bottom: 80px;
+}
+div.site-content>div {
+	padding: 0 90px 10px 90px;
+}
+div.site-content>div>h3 {
+	font-size: 20px;
+}
+h1.brand-heading {
+	padding-top: 25px;
+}
+h5 {
+	font-weight: bold;
+}
+nav.nav-education {
+	text-align: center;
+	width: 900px;
+	height: 40px;
+    margin: 10px 0 20px -75px;
+	background-color: #333;
+	padding-top: 8px;
+}
+nav.nav-education>span {
+	padding: 10px 15px;
+	border-right: 1px solid rgba(255,255,255,0.1);
+}
+nav.nav-education>span.application {
+	border-right: 0px;
+}
+div.educ-info {
+	text-align: justify;
+	width: 470px;
+}
+div.side-info {
+	background-color: #333;
+	color: white;
+	margin: 40px 0 0 0;
+	float: right;
+}
