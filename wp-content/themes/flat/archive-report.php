@@ -22,8 +22,8 @@
 				<?php flat_hook_archive_top(); ?>
 
 				<?php if ( have_posts() ) : 
+						$user = wp_get_current_user();
 						while ( have_posts() ) : the_post(); 					
-							$user = wp_get_current_user();
 							$author = get_the_author_id();
 
 							//Shows all courses if logged in has permitted role or is author of report

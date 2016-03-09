@@ -294,8 +294,7 @@ function remove_admin_bar() {
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "report") {
 
     //store post vars into variables for later use
-    //now would be a good time to run some basic error checking/validation
-    //to ensure that data for these values have been set
+    
     $title      = wp_strip_all_tags($_POST['title']);
     $question_1 = wp_strip_all_tags($_POST['question_1']);
     $question_2 = wp_strip_all_tags($_POST['question_2']);
@@ -303,10 +302,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     $rate       = wp_strip_all_tags($_POST['rate']);
     $post_type  = 'report';
     $author     = $_POST['author'];
+  
 
-    //sanitize_text_field($title) osv.      
-
-    //the array of arguements to be inserted with wp_insert_post
+    //the array of arguments to be inserted
     $new_post = array(
     'post_title'    => $title,
     'post_status'   => 'publish',          
@@ -314,8 +312,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     'post_author' => $author
     );
 
-    //insert the the post into database by passing $new_post to wp_insert_post
-    //store our post ID in a variable $pid
+    //inserts the post into database and stores our post ID in a variable
+    // function automatically sanitizes and validates
+
     $pid = wp_insert_post($new_post);
 
     //insert data to custom fields
@@ -329,17 +328,11 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
 
-    //store our post vars into variables for later use
-    //now would be a good time to run some basic error checking/validation
-    //to ensure that data for these values have been set
     $title      = $_POST['author_nickname'].'s studieplan';
     $plan       = wp_strip_all_tags($_POST['plan']);
     $post_type  = 'plan';
     $author     = $_POST['author'];
 
-      
-
-    //the array of arguements to be inserted with wp_insert_post
     $new_post = array(
     'post_title'    => $title,
     'post_content'  => $plan,
@@ -348,8 +341,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     'post_author'   => $author
     );
 
-    //insert the the post into database by passing $new_post to wp_insert_post
-    //store our post ID in a variable $pid
     $pid = wp_insert_post($new_post);
 
 }
@@ -360,9 +351,9 @@ function my_login_redirect( $redirect_to, $request, $user ) {
     //is there a user to check?
     global $user;
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
-        //check for admins
+        //check for permitted roles
         if ( in_array( 'teacher', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'school_administrator', $user->roles ) ) {
-            // redirect them to the default place
+            // redirect to dashboard
             $redirect_to = "/wp-admin";
             return $redirect_to;
         }
@@ -387,7 +378,7 @@ add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
 $qlok_menu = 'Qlokare menu';
 $qlok_menu_exists = wp_get_nav_menu_object( $qlok_menu );
 
-// If it doesn't exist, let's create it.
+// Create if doesn't exists Logged in menu
 if( !$qlok_menu_exists){
     $menu_id = wp_create_nav_menu($qlok_menu);
 
@@ -420,7 +411,7 @@ if( !$qlok_menu_exists){
 $frontpage_menu = 'Frontpage menu';
 $frontpage_menu_exists = wp_get_nav_menu_object( $frontpage_menu );
 
-// If it doesn't exist, let's create it.
+// Create if doesn't exists Not logged in menu
 if( !$frontpage_menu_exists){
     $menu_id = wp_create_nav_menu($frontpage_menu);
 

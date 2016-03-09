@@ -18,10 +18,12 @@
 
 			<div id="content" class="site-content" role="main">
 				<?php flat_hook_archive_top(); ?>
-			<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) : 
+						$user = wp_get_current_user();
+					?>
+
 				<?php while ( have_posts() ) : the_post(); ?>
 					<?php 					
-						$user = wp_get_current_user();
 						$author = get_the_author_id();
 
 						if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles ) || $author == $user->ID ) :?>
