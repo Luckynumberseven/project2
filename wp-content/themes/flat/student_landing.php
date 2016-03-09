@@ -50,6 +50,8 @@ $user_groups = $groups_user->groups;
 				<?php if ( have_posts() ) : ?> <!-- the loop -->
 					<?php while ( have_posts() ) : the_post(); ?>
 						
+
+
 						<?php //Get post categories, compare to user groups, print accordingly
 						$categories = get_the_category();
 
@@ -85,6 +87,7 @@ $user_groups = $groups_user->groups;
 			<?php flat_hook_entry_bottom(); ?>
 		</div>
 	<?php flat_hook_entry_after(); ?>
+
 
 
 

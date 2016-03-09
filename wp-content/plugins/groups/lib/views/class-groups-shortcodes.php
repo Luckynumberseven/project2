@@ -186,7 +186,10 @@ class Groups_Shortcodes {
 					if ( $users ) {
 						$output .= '<ul>';
 						foreach( $users as $user ) {
-							$output .= '<li>' . wp_filter_nohtml_kses( $user->user_login ) . '</li>';
+							$output .= '<li>' . wp_filter_nohtml_kses( $user->display_name.' ['. $user->user_email . ']' ) . '<br>'.
+										get_avatar($user->ID) . '<br>'.
+										'About me: ' . wp_filter_nohtml_kses( get_user_meta($user->ID, 'description', true) ) . '<br>' . 
+										'Group: '. $current_group->name . '</li><br>';
 						}
 						$output .= '</ul>';
 					}
