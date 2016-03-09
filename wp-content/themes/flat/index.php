@@ -4,23 +4,11 @@
 <?php/* get_header(); ?>
 
 	<?php flat_hook_index_before(); ?>
-	<div id="content" class="site-content" role="main">
+	<div id="content" class="site-content xx" role="main">
 		<?php flat_hook_index_top(); ?>
 
-		<?php
-		if( is_user_logged_in() ) : ?>
-			<a href="<?php echo wp_logout_url(); ?>"><button>Logout</button></a>
-			
-
-		<?php
-		endif;
-		?>
 		<?php $user = wp_get_current_user();
 
-		 print_r($user);
-		// if ($_POST['custom']) :
-		// 	get_template_part( 'student_custom');
-		// endif;
 		if ( in_array( 'student', (array) $user->roles ) ) {
 		    get_template_part('student_landing');
 		}

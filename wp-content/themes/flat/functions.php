@@ -291,6 +291,8 @@ function remove_admin_bar() {
 
 ################ Handles Front-end posting of students study report ################
 
+
+
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "report") {
 
     //store post vars into variables for later use
@@ -326,8 +328,8 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 ################ Handles Front-end posting of students studieplan ################
 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
-
+function prefix_send_plan() {
+    if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
     $title      = $_POST['author_nickname'].'s studieplan';
     $plan       = wp_strip_all_tags($_POST['plan']);
     $post_type  = 'plan';
@@ -342,8 +344,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     );
 
     $pid = wp_insert_post($new_post);
-
+    }
 }
+
+add_action( 'admin_post_plan', 'prefix_send_plan' );
+
+
+
 
 ############ Login/Logout Redirects #################
 

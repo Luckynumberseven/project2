@@ -43,12 +43,20 @@
 						endif ?>
 
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+
 							<?php wp_nav_menu( array( 'menu' => 'Qlokare menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
+							<!-- logoutbutton -->
+							<ul class="nav-menu">
+								<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-108">
+									<a href="<?php echo wp_logout_url( home_url() ); ?>">Logga ut</a>
+								</li>
+							</ul>
+							 
 						</nav>
 					<?php
 					else :?>
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-							<?php wp_nav_menu( array( 'menu' => 'Frontpage menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
+							 <?php wp_nav_menu( array( 'menu' => 'Frontpage menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
 						</nav>
 					<?php
 					endif ?>
