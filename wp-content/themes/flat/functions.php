@@ -333,7 +333,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     //now would be a good time to run some basic error checking/validation
     //to ensure that data for these values have been set
     $title      = $_POST['author_nickname'].'s studieplan';
-    $plan       = wp_strip_all_tags($_POST['plan']);
+    $plan       = wp_strip_all_tags($_POST['studieplan']);
     $post_type  = 'plan';
     $author     = $_POST['author'];
 
@@ -351,7 +351,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     //insert the the post into database by passing $new_post to wp_insert_post
     //store our post ID in a variable $pid
     $pid = wp_insert_post($new_post);
-
 }
 
 ############ Login/Logout Redirects #################
@@ -428,24 +427,62 @@ if( !$frontpage_menu_exists){
     wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Hem'),
         'menu-item-classes' => 'home',
-        'menu-item-url' => home_url( '/' ), 
+        'menu-item-url' => home_url( '/' ),
         'menu-item-status' => 'publish'));
 
     wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Kurser'),
-        'menu-item-url' => home_url( '/course' ), 
+        'menu-item-url' => home_url( '/course' ),
         'menu-item-status' => 'publish'));
-    wp_update_nav_menu_item($menu_id, 0, array(
+
+    $top_menu = wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Utbildningens information'),
-        'menu-item-url' => home_url( '/' ), 
-        'menu-item-status' => 'publish'));
+        'menu-item-url' => home_url( '/' ),
+        'menu-item-status' => 'publish',
+        ));
+    //Sub menu item (first child)
+    wp_update_nav_menu_item($menu_id, 0, array( 
+        'menu-item-title' =>  __('Mål med utbildningen'),
+        'menu-item-url' => home_url( '/mal-med-utbildningen' ),
+        'menu-item-status' => 'publish',
+        'menu-item-parent-id' => $top_menu,
+        ));
+    //Sub menu item (first child)
+    wp_update_nav_menu_item($menu_id, 0, array( 
+        'menu-item-title' =>  __('Utbildningens innehåll'),
+        'menu-item-url' => home_url( '/utbildningens-innehall' ),
+        'menu-item-status' => 'publish',
+        'menu-item-parent-id' => $top_menu,
+        ));
+    //Sub menu item (first child)
+    wp_update_nav_menu_item($menu_id, 0, array( 
+        'menu-item-title' =>  __('Ledningsgrupp'),
+        'menu-item-url' => home_url( '/ledningsgrupp' ),
+        'menu-item-status' => 'publish',
+        'menu-item-parent-id' => $top_menu,
+        ));
+    //Sub menu item (first child)
+    wp_update_nav_menu_item($menu_id, 0, array( 
+        'menu-item-title' =>  __('Arbetsprov och behörighet'),
+        'menu-item-url' => home_url( '/arbetsprov-och-behorighet' ),
+        'menu-item-status' => 'publish',
+        'menu-item-parent-id' => $top_menu,
+        ));
+    //Sub menu item (first child)
+    wp_update_nav_menu_item($menu_id, 0, array( 
+        'menu-item-title' =>  __('Ansökan'),
+        'menu-item-url' => home_url( '/ansokan' ),
+        'menu-item-status' => 'publish',
+        'menu-item-parent-id' => $top_menu,
+        ));
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Students'),
-        'menu-item-url' => home_url( '/students' ), 
+        'menu-item-title' =>  __('Elevers info'),
+        'menu-item-url' => home_url( '/students' ),
         'menu-item-status' => 'publish'));
+
     wp_update_nav_menu_item($menu_id, 0, array(
         'menu-item-title' =>  __('Login'),
-        'menu-item-url' => home_url( '/wp-login.php' ), 
+        'menu-item-url' => home_url( '/wp-login.php' ),
         'menu-item-status' => 'publish'));
 }
 
