@@ -2,6 +2,7 @@
 
 <?php
 if ( is_user_logged_in() ): ?>
+<h1 class="page-title" itemprop="name"> Studieplan för <?php echo $current_user->display_name ?></h1>
 	<div id="content" class="site-content" role="main" itemscope itemtype="http://schema.org/Article">
 		<?php
 		while ( have_posts() ) : the_post();

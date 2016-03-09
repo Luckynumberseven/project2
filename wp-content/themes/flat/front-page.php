@@ -14,12 +14,7 @@
 			    $pagename = $post->post_name;  
 			}
 		
-		}
-		elseif (is_user_logged_in() == TRUE ) { ?>
-			<a href="<?php echo wp_logout_url(); ?>"><button>Logout</button></a>
-		<?php
-		}
-		?>
+		}?>
 
 		<?php $user = wp_get_current_user();
 

@@ -1,4 +1,6 @@
 <?php get_header(); ?>
+	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 	<div id="content" class="site-content hentry" role="main" itemscope itemtype="http://schema.org/Article">
 		<?php
 		$parent_post = $post->ID; //Stores post-id for later use outside loop

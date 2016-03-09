@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
+<!--Behövs denna?
 	<?php if ( is_author() && get_the_author_meta( 'description' ) ) : ?>
 		<div class="author-info">
 			<div class="author-avatar">
@@ -12,7 +13,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-
+-->
 	<?php flat_hook_archive_before(); ?>
 
 	<div id="content" class="site-content" role="main">

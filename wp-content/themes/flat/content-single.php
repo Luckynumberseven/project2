@@ -47,6 +47,4 @@ if ( get_the_author_meta( 'description' ) && empty( $single_author_box ) ) {
 	<?php flat_hook_entry_after(); ?>
 	<?php the_tags( '<div class="tags-links">', __( ' ', 'flat' ), '</div>' ); ?>
 </article>
-	<?php if ( $author_postbox ) : ?>
-		<?php get_template_part( 'author-bio' ); ?>
-	<?php endif; ?>
+	
