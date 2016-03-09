@@ -291,8 +291,6 @@ function remove_admin_bar() {
 
 ################ Handles Front-end posting of students study report ################
 
-
-
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "report") {
 
     //store post vars into variables for later use
@@ -327,21 +325,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 }
 
 ################ Handles Front-end posting of students studieplan ################
-
-<<<<<<< HEAD
-#function prefix_send_plan() {
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
-
-    //store our post vars into variables for later use
-    //now would be a good time to run some basic error checking/validation
-    //to ensure that data for these values have been set
-    $title      = $_POST['author_nickname'].'s studieplan';
-    $plan       = wp_strip_all_tags($_POST['plan']);
-    $post_type  = 'plan';
-    $author     = $_POST['author'];
-=======
-function prefix_send_plan() {
-    if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == "plan") {
     $title      = $_POST['author_nickname'].'s studieplan';
     $plan       = wp_strip_all_tags($_POST['plan']);
     $post_type  = 'plan';
@@ -356,27 +340,7 @@ function prefix_send_plan() {
     );
 
     $pid = wp_insert_post($new_post);
-    }
 }
->>>>>>> 048b27e73f4098eaf2df87cda2fcf02106fb6bab
-
-      
-
-    //the array of arguements to be inserted with wp_insert_post
-    $new_post = array(
-    'post_title'    => $title,
-    'post_content'  => $plan,
-    'post_status'   => 'publish',          
-    'post_type'     => $post_type,
-    'post_author'   => $author
-    );
-    
-    //insert the the post into database by passing $new_post to wp_insert_post
-    //store our post ID in a variable $pid
-    $pid = wp_insert_post($new_post);
-}
-
-
 
 ############ Login/Logout Redirects #################
 

@@ -6,17 +6,6 @@
 			<?php flat_hook_archive_before(); ?>
 
 			<div id="content" class="site-content" role="main">
-<<<<<<< HEAD
-=======
-				<?php flat_hook_archive_top(); ?>
-			<?php if ( have_posts() ) : 
-						$user = wp_get_current_user();
-					?>
-
-				<?php while ( have_posts() ) : the_post(); ?>
-					<?php 					
-						$author = get_the_author_id();
->>>>>>> 048b27e73f4098eaf2df87cda2fcf02106fb6bab
 
 				<div class="entry-content">
 					<?php flat_hook_entry_top ?>
