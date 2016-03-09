@@ -50,8 +50,6 @@ $user_groups = $groups_user->groups;
 				<?php if ( have_posts() ) : ?> <!-- the loop -->
 					<?php while ( have_posts() ) : the_post(); ?>
 						
-
-
 						<?php //Get post categories, compare to user groups, print accordingly
 						$categories = get_the_category();
 
@@ -64,25 +62,6 @@ $user_groups = $groups_user->groups;
 
 					<?php endwhile; ?>
 				<?php endif ?>
-			</div>
-
-			<div class="">
-				<?php $plan = new WP_query(['post_type' => 'plan', 'author' => $user_id]);
-				if( $plan->have_posts() ) : $plan->the_post(); ?>
-					<h1><a href='<?php the_permalink(); ?>'>Min studieplan</a></h1>
-				<?php else : ?>
-				<h2>Lämna din studieplan</h2>
-				<p>Varje elev i utbildningen ska ha en individuell studieplan. Det är den som är verktyget för att planera elevens utbildning. Planen ska innehålla uppgifter om elevens mål och omfattning av studierna.</p>
-				<p>
-					<form method="post" name="front_end" action="" >
-						<textarea cols="75" rows="15" name="plan" placeholder="Dina mål..." required></textarea><br>
-						<input type="hidden" name="action" value="plan" />
-						<input type="hidden" name="author" value="<?php echo $user_id ?>" />
-						<input type="hidden" name="author_nickname" value="<?php echo $current_user->user_login ?>" />
-						<input type="submit" />
-					</form>
-				</p>
-				<?php endif;?>
 			</div>
 			<?php flat_hook_entry_bottom(); ?>
 		</div>

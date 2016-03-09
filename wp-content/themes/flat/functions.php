@@ -480,7 +480,7 @@ if( !$frontpage_menu_exists){
         'menu-item-parent-id' => $top_menu,
         ));
     wp_update_nav_menu_item($menu_id, 0, array(
-        'menu-item-title' =>  __('Elevers info'),
+        'menu-item-title' =>  __('Elever'),
         'menu-item-url' => home_url( '/students' ),
         'menu-item-status' => 'publish'));
 
