@@ -3,9 +3,7 @@
 	<div id="content" class="site-content xx" role="main">
 		<?php flat_hook_index_top(); ?>
 		<?php $user = wp_get_current_user();
-		if ($_POST['custom']) :
-			get_template_part( 'student_custom');
-		endif;
+			
 		if ( in_array( 'student', (array) $user->roles ) ) {
 		    get_template_part('student_landing');
 		}

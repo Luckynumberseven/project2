@@ -3,22 +3,7 @@
 	<?php //the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 
 	<?php if( is_user_logged_in() ) : ?>	
-			
-			<!-- används ej, ta bort?
-
-			<?php if ( is_author() && get_the_author_meta( 'description' ) ) : ?>
-				<div class="author-info">
-					<div class="author-avatar">
-						<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'flat_author_bio_avatar_size', 80 ) ); ?>
-					</div>
-					<div class="author-description">
-						<h4><?php printf( __( 'About %s', 'flat' ), get_the_author() ); ?></h4>
-						<p><?php the_author_meta( 'description' ); ?></p>
-					</div>
-				</div>
-			<?php endif; ?>
-			-->
-
+		<h1 class="page-title" itemprop="name">Studierapport för <?php echo $current_user->display_name ?></h1>
 			<?php flat_hook_archive_before(); ?>
 
 			<div id="content" class="site-content" role="main">
@@ -26,7 +11,7 @@
 				<div class="entry-content">
 					<?php flat_hook_entry_top ?>
 
-					<h1>Lämna en studie rapport</h1>
+					<h1>Lämna din studie rapport</h1>
 						<form method="post" name="front_end" action="">
 							<input type="text" name="title" placeholder="Vecka..." required/><br>
 							<label><b>Vad har du gjort den senaste tiden?</b></label>
