@@ -1,19 +1,16 @@
 <?php
+/*
+Plugin Name: Classes | A Groups Extension
+Plugin URI: http://www.qlok.se
+Description: Probably the best plugin in the world!
+Author: Lucky Number Seven
+Version: 1.0
+Author URI: http://www.qlok.se
+*/
 
-/**
- * Provide a admin area view for the plugin
- *
- * This file is used to markup the admin-facing aspects of the plugin.
- *
- * @link       http://thomaskjellberg.se
- * @since      1.0.0
- *
- * @package    Group_User_Posttype
- * @subpackage Group_User_Posttype/admin/partials
- */
+function classes_groups_extension_admin_page() {
+
 ?>
-
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
 <div class="wrap">
 
@@ -30,6 +27,8 @@
 </div>
 
 <?php
+
+}
 
 /**
  * Show add group form.
@@ -193,5 +192,13 @@ function classes_admin_groups_add_submit() {
 
     return $group_id;
 } // function groups_admin_groups_add_submit
+
+function classes_groups_extension_admin_menu(){
+    #add_options_page('Classes', 'Classes', 1, 'classes_groups_extension', 'classes_groups_extension_admin_page');
+    add_menu_page( 'Class manager', 'Classes', 'manage_options', 'classes_groups_extension', 'classes_groups_extension_admin_page', '', '35'
+    );
+}
+
+add_action('admin_menu', 'classes_groups_extension_admin_menu');
 
 
