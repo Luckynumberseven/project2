@@ -23,6 +23,7 @@
 				if ( in_array( $category->name, $groups_name ) ) {
 					$permitted = TRUE;
 				}
+				
 			}
 		endif;
 
@@ -58,8 +59,28 @@
 	</div>
 <?php
 else : 
-	echo '<div class="entry-content hentry" itemprop="articleBody">
-			<p>Please log in to view content</p>';
+	the_post();
+			get_template_part( 'content', 'single' );
+			$query = new WP_Query( array( 'post_type' => 'course', 'category_name' => 'Public', 'post_parent' => $post->ID ) );
+				if( $query->have_posts() ) :
+				?>
+					<div class="entry-content hentry" itemprop="articleBody">
+						<h4 class="entry-title">Kursens delmoment</h4>
+						<hr>
+						<ul>
+							<?php
+							while( $query->have_posts() ) : $query->the_post();?>
+								<?php flat_hook_entry_top(); ?>
+								<li><h4><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></h4></li>
+								<?php flat_hook_entry_bottom();  
+							endwhile; ?>
+						</ul>
+					</div>
+					<?php
+				endif;?>
+			<?php
+			wp_reset_postdata();
+			comments_template();
 
 endif; ?>
 <?php get_footer(); ?>

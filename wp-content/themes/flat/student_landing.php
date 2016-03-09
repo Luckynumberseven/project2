@@ -104,16 +104,19 @@ get_currentuserinfo();
 	<h1>Lämna din studieplan</h1>
 	<p>Varje elev i utbildningen ska ha en individuell studieplan. Det är den som är verktyget för att planera elevens utbildning. Planen ska innehålla uppgifter om elevens mål och omfattning av studierna.</p>
 
-	<?php		
-		echo'	
-			<form method="post" name="front_end" action="" >
-				<textarea cols="75" rows="15" name="plan" placeholder="Dina mål..." required></textarea><br>
+			
+			
+			
+			<form action="/" method="post">
+				<?php echo
+		        '<textarea cols="75" rows="15" name="plan" placeholder="Dina mål..." required></textarea><br>
 				<input type="hidden" name="action" value="plan" />
 				<input type="hidden" name="author" value="'.$user_id.'" />
 				<input type="hidden" name="author_nickname" value="'.$current_user->user_login.'" />
 				<input type="submit" />
-			</form>';
-	?>
+		    </form>';
+		    ?>
+	
 	<?php
 	endif;	
 	?>
