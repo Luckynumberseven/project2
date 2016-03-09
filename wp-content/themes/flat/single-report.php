@@ -11,6 +11,17 @@ if ( is_user_logged_in() ): ?>
 			//Checks if logged in user has the right role or is the author for this report
 			if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles )  || $author == $user->ID) {
 				get_template_part( 'content', 'single' );
+				$fields = get_field_objects();
+				if( $fields )
+				{
+					foreach( $fields as $field_name => $field )
+					{
+						echo '<div>';
+							echo '<h3>' . $field['label'] . '</h3>';
+							echo $field['value'];
+						echo '</div>';
+					}
+				}
 			//Displays navigation for selected roles only.
 			if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles )) {
 

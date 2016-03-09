@@ -149,6 +149,8 @@ function groups_admin_groups_add_submit() {
 	$description = isset( $_POST['description-field'] ) ? $_POST['description-field'] : '';
 	$name        = isset( $_POST['name-field'] ) ? $_POST['name-field'] : null;
 
+	
+
 	$group_id = Groups_Group::create( compact( "creator_id", "datetime", "parent_id", "description", "name" ) );
 	if ( $group_id ) {
 		if ( !empty( $_POST['capability_ids'] ) ) {

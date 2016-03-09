@@ -45,6 +45,7 @@ get_currentuserinfo();
 		Twitter: <?php echo $current_user->twitter; ?><br>
 		Facebook: <?php echo $current_user->facebook; ?> <br>
 		Google+: <?php echo $current_user->gplus; ?> <br>
+		Telefonnummer: <?php echo $current_user->phone; ?> <br>
 
 		<form method="post" action="/edit-user/">
 			<input type="submit" class="button" value="Ändra dina uppgifter">
@@ -54,13 +55,23 @@ get_currentuserinfo();
 
 <div class="entry-content hentry" itemprop="articleBody">
 	<h1>Lämna en studie rapport</h1>
-	<p>Din studierapport ska besvara: Vad har du gjort den senaste tiden? Vad ska du göra den kommande veckan? Ser du några hinder i dina studier?</p>
 
 	<?php		
 		echo'	
 			<form method="post" name="front_end" action="" >
-				<input type="text" name="title" placeholder="Report Title..." /><br>
-				<textarea cols="75" rows="15" name="content" placeholder="Report Content..."></textarea>
+				<input type="text" name="title" placeholder="Vecka..." required/><br>
+				<label><b>Vad har du gjort den senaste tiden?</b></label>
+				<textarea cols="75" rows="15" name="question_1" required></textarea><br>
+				<label><b>Vad ska du göra den kommande veckan?</b></label>
+				<textarea cols="75" rows="15" name="question_2" required></textarea><br>
+				<label><b>Ser du några hinder i dina studier?</b></label>
+				<textarea cols="75" rows="15" name="question_3" required></textarea><br>
+				<label><b>Hur mycket har du lärt dig den här veckan?</b></label><br>
+				<input type="radio" name="rate" value="inget"> Jag har inte lärt mig någonting<br>
+			  	<input type="radio" name="rate" value="lite"> Jag har lärt mig lite<br>
+			  	<input type="radio" name="rate" value="ganska_mycket"> Jag har lärt mig ganska mycket<br>
+			  	<input type="radio" name="rate" value="mycket"> Jag har lärt mig mycket<br>
+			  	<input type="radio" name="rate" value="valdigt_mycket"> Jag har lärt mig väldigt mycket<br><br>
 				<input type="hidden" name="action" value="report" />
 				<input type="hidden" name="author" value="'.$user_id.'" />
 				<input type="submit" />
@@ -81,6 +92,29 @@ get_currentuserinfo();
 				endwhile;	
 	else :
 		Echo 'No posts';
+	endif;	
+	?>
+	<?php flat_hook_index_bottom(); ?>
+</div>
+<div class="entry-content hentry" itemprop="articleBody">
+	<?php $plan = new WP_query(['post_type' => 'plan', 'author' => $user_id]);
+	if( $plan->have_posts() ) : $plan->the_post(); ?>
+		<h1><a href='<?php the_permalink(); ?>'>Min studieplan</a></h1>
+	<?php else : ?>
+	<h1>Lämna din studieplan</h1>
+	<p>Varje elev i utbildningen ska ha en individuell studieplan. Det är den som är verktyget för att planera elevens utbildning. Planen ska innehålla uppgifter om elevens mål och omfattning av studierna.</p>
+
+	<?php		
+		echo'	
+			<form method="post" name="front_end" action="" >
+				<textarea cols="75" rows="15" name="plan" placeholder="Dina mål..." required></textarea><br>
+				<input type="hidden" name="action" value="plan" />
+				<input type="hidden" name="author" value="'.$user_id.'" />
+				<input type="hidden" name="author_nickname" value="'.$current_user->user_login.'" />
+				<input type="submit" />
+			</form>';
+	?>
+	<?php
 	endif;	
 	?>
 	<?php flat_hook_index_bottom(); ?>
