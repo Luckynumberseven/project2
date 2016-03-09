@@ -30,7 +30,12 @@
 				<?php while( $query->have_posts() ) : $query->the_post(); 
 						//Shows all courses if logged in has permitted role 
 						if (!is_user_logged_in()) :
-							get_template_part( 'content', get_post_format() );
+							?>
+							<div class="hentry">
+								<h1><a href="<?php the_permalink()?>"><?php the_title()?></a></h1>
+								<?php the_excerpt() ?>
+							</div>
+							<?php
 						elseif ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles ) ) :
 								get_template_part( 'content', get_post_format() );
 						else : 
@@ -38,7 +43,12 @@
 							$categories = get_the_category();
 							foreach($categories as $category) {
 									if ( in_array( $category->name, $groups_name ) ) {
-										get_template_part( 'content', get_post_format() );
+										?>
+										<div class="hentry">
+											<h1><a href="<?php the_permalink()?>"><?php the_title()?></a></h1>
+											<?php the_excerpt() ?>
+										</div>
+										<?php
 									}
 								}
 						endif?>
