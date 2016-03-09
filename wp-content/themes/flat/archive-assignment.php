@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php get_header(); 
+
+if( is_user_logged_in() ) : 
+?>
 	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 <!--Behövs denna?
@@ -58,6 +61,12 @@
 	<?php endif; ?>
 		<?php flat_hook_archive_bottom(); ?>
 	</div>
+<?php
+else:
+	echo '<div class="hentry">
+			<h3>Please log in to view content</h3>
+		</div>';
+endif ?>
 
 	<?php flat_hook_archive_after(); ?>
 <?php get_footer(); ?>
