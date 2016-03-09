@@ -31,16 +31,7 @@
 					<button type="button" class="btn btn-link hidden-lg toggle-navigation" aria-label="Navigation Menu"><?php _e( '<i class="fa fa-bars"></i>', 'flat' ); ?></button>
 
 					<?php 
-					if( is_user_logged_in() == TRUE ) :
-						$user = wp_get_current_user();
-						if ( in_array('administrator', $user->roles ) ): ?>
-							<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-								<ul class="nav-menu">
-									<li><a href="/wp-admin">Dashboard</a></li>
-								</ul>
-							</nav>
-						<?php 
-						endif ?>
+					if( is_user_logged_in() == TRUE ) :?>
 
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 

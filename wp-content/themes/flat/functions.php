@@ -361,7 +361,8 @@ function my_login_redirect( $redirect_to, $request, $user ) {
         //check for permitted roles
         if ( in_array( 'teacher', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'school_administrator', $user->roles ) ) {
             // redirect to dashboard
-            $redirect_to = "/wp-admin";
+
+            $redirect_to = home_url('/wp-admin');
             return $redirect_to;
         }
         else {
@@ -375,7 +376,7 @@ function my_login_redirect( $redirect_to, $request, $user ) {
 add_filter( 'login_redirect', 'my_login_redirect', 10, 3 );
 
 function my_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
-    return $requested_redirect_to = "/";
+    return $requested_redirect_to = home_url();
 }
 add_filter( 'logout_redirect', 'my_logout_redirect', 10, 3 );
 
