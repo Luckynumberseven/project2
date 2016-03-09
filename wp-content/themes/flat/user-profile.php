@@ -59,15 +59,16 @@ $error = array();
 	}
 
 ?>
-
 <?php get_header(); ?>
-			<?php flat_hook_page_before(); ?>
-			<div itemscope itemtype="http://schema.org/Article" id="content" class="site-content" role="main">
-				<?php flat_hook_page_top(); ?>
-			<div id="content" class="site-content hentry" role="main">
-				<header class="entry-header">
+	<?php flat_hook_page_before(); ?>
+		<div itemscope itemtype="http://schema.org/Article" id="content" class="site-content" role="main">
+			<h1 class="page-title" itemprop=""> Personuppgifter för <?php echo $current_user->display_name ?></h1>
+			<?php flat_hook_page_top(); ?>
+
+			
+				<div class="entry-header">
 					<h3 class="entry-title" itemprop="name"> Ändra dina Personuppgifter: </h3>
-				</header>
+				</div>
 
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 				    <div id="post-<?php the_ID(); ?>">
@@ -132,8 +133,7 @@ $error = array();
 				        <?php _e('Sorry, no page matched your criteria.', 'profile'); ?>
 				    </p><!-- .no-data -->
 				<?php endif; ?>
-			</div>
-				<?php flat_hook_page_bottom(); ?>
-			</div>
-			<?php flat_hook_page_after(); ?>
+			<?php flat_hook_page_bottom(); ?>
+		</div>
+		<?php flat_hook_page_after(); ?>
 <?php get_footer(); ?>

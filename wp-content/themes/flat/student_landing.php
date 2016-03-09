@@ -9,15 +9,21 @@ $user_groups = $groups_user->groups;
 
 	foreach ($user_groups as $group ) {
 		$groups_name[] = $group->name;
-}?>
+	}?>
+
 	<h1 class="page-title" itemprop="name"> Välkommen <?php echo $current_user->display_name ?></h1>
 
 		<?php flat_hook_entry_before(); ?>
 
 		<div class="entry-content" itemprop="articleBody">
-			<p class="bio">
+	
 				<?php flat_hook_entry_top(); ?>
-				<div class="author-info">
+
+				<header class="entry-header hentry">
+					<h2 class="entry-title" itemprop="name"> <?php echo $group->name; ?> </h2>
+				</header>
+
+				<div class="author-info bio">
 					<div class="author-avatar floatleft">
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'flat_author_bio_avatar_size', 100 ) ); ?>
 					</div>
@@ -37,9 +43,9 @@ $user_groups = $groups_user->groups;
 						</p>
 					</div>
 				</div>
-			</p>
 
-			<p class="">
+
+			<div class="bio">
 				<h2>Senaste inlägg från din lärare:</h2>
 				<?php if ( have_posts() ) : ?> <!-- the loop -->
 					<?php while ( have_posts() ) : the_post(); ?>
@@ -56,7 +62,7 @@ $user_groups = $groups_user->groups;
 
 					<?php endwhile; ?>
 				<?php endif ?>
-			</p>
+			</div>
 
 			<div class="">
 				<?php $plan = new WP_query(['post_type' => 'plan', 'author' => $user_id]);
