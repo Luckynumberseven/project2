@@ -7,19 +7,19 @@
 		<h1 class="entry-title brand-heading col-xs-12" itemprop="name">Front-End Developer</h1>
 		<nav class="nav-education col-xs-12">
 			<span>
-			<a href="/mal-med-utbildningen">Mål med utbildningen</a>
+			<a href="<?php echo home_url('/mal-med-utbildningen') ?>">Mål med utbildningen</a>
 			</span>
 			<span>
-			<a href="/utbildningens-innehall">Utbildningens innehåll</a>
+			<a href="<?php echo home_url('/utbildningens-innehall') ?>">Utbildningens innehåll</a>
 			</span>
 			<span>
-			<a href="/ledningsgrupp">Ledningsgrupp</a>
+			<a href="<?php echo home_url('/ledningsgrupp')?>">Ledningsgrupp</a>
 			</span>
 			<span>
-			<a href="/arbetsprov-och-behorighet">Arbetsprov och behörighet</a>
+			<a href="<?php echo home_url('/arbetsprov-och-behorighet')?>">Arbetsprov och behörighet</a>
 			</span>
 			<span class="application">
-			<a href="/ansokan">Ansökan</a>
+			<a href="<?php echo home_url('/ansokan')?>">Ansökan</a>
 			</span>
 		</nav>
 	</header>
@@ -72,7 +72,4 @@
 	</div>
 	<?php flat_hook_entry_after(); ?>
 </div>
-</div>
-</div>
-
 <?php get_footer(); ?>

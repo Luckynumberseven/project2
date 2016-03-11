@@ -9,15 +9,10 @@ if ( is_user_logged_in() ): ?>
 			$author = get_the_author_id();
 			$user = wp_get_current_user();
 			
-			//Checks if logged in user has the right role or is the author for this report
+			//Checks if logged in user has the right role or is the author for this plan
 			if ( in_array( 'school_administrator', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'teacher', $user->roles )  || $author == $user->ID) {
 				get_template_part( 'content', 'single' );
-				
-			//Displays navigation for selected roles only.
-			if ( in_array( 'editor', $user->roles) || in_array( 'administrator', $user->roles) || in_array( 'author', $user->roles )) {
-
-			}
-			comments_template();
+				comments_template();
 			}
 			else {
 				echo '
@@ -25,8 +20,7 @@ if ( is_user_logged_in() ): ?>
 					<h3>You are not authorized for viewing this content</h3>
 				</div>';
 			}
-		endwhile;
-			?>
+		endwhile;?>
 	</div>
 <?php 
 else:

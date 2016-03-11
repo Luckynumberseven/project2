@@ -20,9 +20,7 @@ require get_template_directory() . '/inc/customize.php'; # Enables user customiz
 require get_template_directory() . '/inc/hooks.php'; # Enables user customization via WordPress plugin API
 require get_template_directory() . '/inc/template-tags.php'; # Contains functions that output HTML
 
-/**
-*Custom function.php**********************************
-*/
+/*************************************  Custom LUCKYNUMBER7 function.php    ***********************************/
 
 ######################## Custom post types ################################
 
@@ -48,7 +46,7 @@ function post_type_course_init() {
             'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'archives'              => _x( 'Course archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
-            'insert_into_item'      => 'Insert into Course',//_x( 'Insert into Course', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+            'insert_into_item'      => 'Insert into Course',
             'uploaded_to_this_item' => _x( 'Uploaded to this Course', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
             'filter_items_list'     => _x( 'Filter Courses list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
             'items_list_navigation' => _x( 'Courses list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
@@ -99,7 +97,7 @@ function post_type_report_init() {
             'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'archives'              => _x( 'Report archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
-            'insert_into_item'      => 'Insert into Report',//_x( 'Insert into Report', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+            'insert_into_item'      => 'Insert into Report',
             'uploaded_to_this_item' => _x( 'Uploaded to this Report', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
             'filter_items_list'     => _x( 'Filter Reports list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
             'items_list_navigation' => _x( 'Reports list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
@@ -150,7 +148,7 @@ function post_type_course_assignments_init() {
             'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'archives'              => _x( 'Assignment archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
-            'insert_into_item'      => 'Insert into Assignment',//_x( 'Insert into Assignment', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+            'insert_into_item'      => 'Insert into Assignment',
             'uploaded_to_this_item' => _x( 'Uploaded to this Assignment', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
             'filter_items_list'     => _x( 'Filter Assignments list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
             'items_list_navigation' => _x( 'Assignments list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
@@ -202,7 +200,7 @@ function post_type_plan_init() {
             'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
             'archives'              => _x( 'Plan archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
-            'insert_into_item'      => 'Insert into Plan',//_x( 'Insert into Plan', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+            'insert_into_item'      => 'Insert into Plan',
             'uploaded_to_this_item' => _x( 'Uploaded to this Plan', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
             'filter_items_list'     => _x( 'Filter Plans list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
             'items_list_navigation' => _x( 'Plans list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
@@ -507,9 +505,10 @@ function save_assignment_meta($post_id, $post) {
 }
 add_action('save_post', 'save_assignment_meta',1,2);
 
-/**
-*ends Custom function.php**********************
-*/
+
+/*************************************  ENDS Custom LUCKYNUMBER7 function.php    ***********************************/
+
+
 
 /**
  * Set the max width for embedded content

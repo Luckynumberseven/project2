@@ -12,17 +12,15 @@
 			</div>
 		</div>
 	<?php endif; ?>
-
 	<?php flat_hook_archive_before(); ?>
 
 	<div id="content" class="site-content" role="main">
 
-		<?php flat_hook_archive_top(); ?>
+	<?php flat_hook_archive_top(); ?>
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-			<?php// get_template_part( 'content', get_post_format() ); ?>
 			<div class="hentry">
-			<h1><a href="<?php the_permalink()?>"><?php the_title()?></a></h1>
+				<h1><a href="<?php the_permalink()?>"><?php the_title()?></a></h1>
 			<?php the_excerpt() ?>
 			</div>
 		<?php endwhile; ?>

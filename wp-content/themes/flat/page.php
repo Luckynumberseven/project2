@@ -19,7 +19,6 @@
 				</article>
 				<?php comments_template(); ?>
 			<?php endwhile; ?>
-
 				<?php flat_hook_page_bottom(); ?>
 			</div>
 			<?php flat_hook_page_after(); ?>

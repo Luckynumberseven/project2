@@ -41,7 +41,6 @@ function talk2api_admin_page() {
 		$method_post = TRUE;
 	}
 
-
 	elseif($_POST['talk2api_update_grade'] == TRUE){
 		$student = filter_var( $_POST['student'], FILTER_SANITIZE_STRING );
 		$grade = filter_var( $_POST['new_grade'], FILTER_SANITIZE_STRING );
@@ -132,7 +131,6 @@ function talk2api_admin_page() {
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Sends the postfields along with our request. Forces request to POST.
 	}
 
-
 	$output = curl_exec($curl); // Holds cUrl response
 	curl_close($curl); 
 	echo $output;
@@ -140,7 +138,8 @@ function talk2api_admin_page() {
 }
 
 function talk2api_admin_menu(){
-	add_options_page('Talk 2 API', 'Talk 2 API', 1, 'talk2api', 'talk2api_admin_page');
+	 add_menu_page( 'Talk 2 API', 'Talk 2 API', 'manage_options', 'talk2api', 'talk2api_admin_page', '', '35'
+    );
 }
 
 add_action('admin_menu', 'talk2api_admin_menu');

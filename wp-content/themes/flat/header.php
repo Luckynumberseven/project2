@@ -32,9 +32,7 @@
 
 					<?php 
 					if( is_user_logged_in() == TRUE ) :?>
-
 						<nav id="site-navigation" class="navigation main-navigation" role="navigation">
-
 							<?php wp_nav_menu( array( 'menu' => 'Qlokare menu', 'menu_class' => 'nav-menu', 'container' => false ) ); ?>
 							<!-- logoutbutton -->
 							<ul class="nav-menu">
@@ -42,7 +40,6 @@
 									<a href="<?php echo wp_logout_url( home_url() ); ?>">Logga ut</a>
 								</li>
 							</ul>
-							 
 						</nav>
 					<?php
 					else :?>
@@ -57,7 +54,7 @@
 				<?php flat_hook_header_after(); ?>
 
 				<div class="sidebar-offcanvas">
-<?php get_sidebar(); ?>
+					<?php get_sidebar(); ?>
 				</div>
 			</div>
 

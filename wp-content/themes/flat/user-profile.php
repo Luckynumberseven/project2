@@ -65,7 +65,6 @@ $error = array();
 			<h1 class="page-title" itemprop=""> Personuppgifter för <?php echo $current_user->display_name ?></h1>
 			<?php flat_hook_page_top(); ?>
 
-			
 				<div class="entry-header">
 					<h3 class="entry-title" itemprop="name"> Ändra dina Personuppgifter: </h3>
 				</div>

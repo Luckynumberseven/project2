@@ -54,17 +54,17 @@
 						}
 					}
 					//If not permitted by role: check if logged in user is the author to any attachment and display those:
-				else {
-					foreach ( $attachments as $post ) {
-						setup_postdata( $post );
+					else {
+						foreach ( $attachments as $post ) {
+							setup_postdata( $post );
 
-						if( $post->post_author == $user->ID ){
-						echo '<h2>Uppladdat:</h2><p><a href="'.get_attachment_link( $post->ID, false ).'">'.get_the_author($post->ID).'</a></p>';
+							if( $post->post_author == $user->ID ){
+							echo '<h2>Uppladdat:</h2><p><a href="'.get_attachment_link( $post->ID, false ).'">'.get_the_author($post->ID).'</a></p>';
+							}
 						}
 					}
-				}
-				echo '</div>';
-				wp_reset_postdata();
+					echo '</div>';
+					wp_reset_postdata();
 				}
 				?>
 				<?php 

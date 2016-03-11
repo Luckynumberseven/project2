@@ -4,7 +4,6 @@
 	<div id="content" class="site-content" role="main">
 		<?php flat_hook_index_top(); ?>
 
-
 		<?php
 		if( is_user_logged_in() == FALSE) { 
 			$pagename = get_query_var('home');  
@@ -13,16 +12,13 @@
 			    $post = $wp_query->get_queried_object();  
 			    $pagename = $post->post_name;  
 			}
-		
 		}?>
 
 		<?php $user = wp_get_current_user();
 
 		if ( in_array( 'student', (array) $user->roles ) ) {
-			//show_admin_bar(FALSE);
 		    get_template_part('student_landing');
 		}
-		
 		else {
 		?>
 			<?php if ( have_posts() ) : ?> <!-- the loop -->
@@ -38,8 +34,7 @@
 							<?php get_template_part('inlogged'); ?>
 						</div>
 				<?php endif ?>
-
-
+				
 			<?php the_posts_pagination( array( 'prev_text' => __( '<i class="fa fa-chevron-left"></i>', 'flat' ), 'next_text' => __( '<i class="fa fa-chevron-right"></i>', 'flat' ) ) ); ?>
 		<?php else : ?>
 			<?php get_template_part( 'content', 'none' ); ?>

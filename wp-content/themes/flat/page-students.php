@@ -11,8 +11,7 @@ $args1 = array(
 	'orderby' => 'user_nicename',
 	'order' => 'ASC'
 );
-$students = get_users($args1);
-?>
+$students = get_users($args1);?>
 
 <?php
 foreach ($students as $user) {
@@ -32,9 +31,8 @@ foreach ($students as $user) {
 		}
 	}
 	echo $class_info;
-}
+}?>
 
-?>
 <?php flat_hook_index_bottom(); ?>
 </div>
 <?php flat_hook_index_after(); ?>

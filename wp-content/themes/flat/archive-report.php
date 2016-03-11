@@ -6,7 +6,6 @@
 			<?php flat_hook_archive_before(); ?>
 
 			<div id="content" class="site-content" role="main">
-
 				<div class="entry-content">
 					<?php flat_hook_entry_top ?>
 
@@ -30,9 +29,7 @@
 						<input type="hidden" name="post_author" value="<?php $user_id ?>" />
 						<input type="submit" />
 					</form>
-
 					<hr>
-
 					<h1>Tidigare rapporter</h1>
 					<?php
 					$reports = new WP_query(['post_type' => 'report', 'author' => $user_id]);
@@ -46,10 +43,7 @@
 						endwhile;	
 					else :
 						echo 'No posts';
-					endif;	
-					?> 
-	
-
+					endif;?> 
 					<?php flat_hook_entry_bottom() ?>
 				</div>
 			</div>
@@ -58,6 +52,5 @@
 				<p>Please log in to view content</p>
 			</div>
 		<?php endif ?>
-
 	<?php flat_hook_archive_after(); ?>
 <?php get_footer(); ?>

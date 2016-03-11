@@ -8,11 +8,11 @@
 			<div id="content" class="site-content" role="main">
 
 				<div class="entry-content">
-					<?php flat_hook_entry_top ?>
+					<?php flat_hook_entry_top() ?>
 
 					<?php $plan = new WP_query(['post_type' => 'plan', 'author' => $user_id]);
-					if( $plan->have_posts() ) : $plan->the_post();
-						?>
+					if( $plan->have_posts() ) : $plan->the_post();?>
+					
 							<h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
 							<p>Posted: <?php the_time("Y:m:d H:m") ?></p>
 						<?php	
@@ -28,10 +28,7 @@
 							<input type="submit" />
 						</form>
 					<?php 
-					endif;	
-					?> 
-	
-
+					endif;?>
 					<?php flat_hook_entry_bottom() ?>
 				</div>
 			</div>
@@ -40,6 +37,5 @@
 				<p>Please log in to view content</p>
 			</div>
 		<?php endif ?>
-
 	<?php flat_hook_archive_after(); ?>
 <?php get_footer(); ?>

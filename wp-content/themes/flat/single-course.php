@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 	<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 	<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
-<?php if ( is_user_logged_in() ): ?>
+<?php 
+if ( is_user_logged_in() ): ?>
 	<div id="content" class="site-content" role="main" itemscope itemtype="http://schema.org/Article">
-
 		<?php
 			$permitted = FALSE;
 			$user = wp_get_current_user();
@@ -25,7 +25,6 @@
 				if ( in_array( $category->name, $groups_name ) ) {
 					$permitted = TRUE;
 				}
-				
 			}
 		endif;
 
@@ -33,8 +32,7 @@
 			the_post();
 			get_template_part( 'content', 'single' );
 			$query = new WP_Query( array( 'post_type' => 'course','post_parent' => $post->ID ) );
-				if( $query->have_posts() ) :
-				?>
+				if( $query->have_posts() ) : ?>
 					<div class="entry-content hentry" itemprop="articleBody">
 						<h4 class="entry-title">Kursens delmoment</h4>
 						<hr>
@@ -61,28 +59,40 @@
 	</div>
 <?php
 else : 
-	the_post();
-			get_template_part( 'content', 'single' );
-			$query = new WP_Query( array( 'post_type' => 'course', 'category_name' => 'Public', 'post_parent' => $post->ID ) );
-				if( $query->have_posts() ) :
-				?>
-					<div class="entry-content hentry" itemprop="articleBody">
-						<h4 class="entry-title">Kursens delmoment</h4>
-						<hr>
-						<ul>
-							<?php
-							while( $query->have_posts() ) : $query->the_post();?>
-								<?php flat_hook_entry_top(); ?>
-								<li><h4><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></h4></li>
-								<?php flat_hook_entry_bottom();  
-							endwhile; ?>
-						</ul>
-					</div>
-					<?php
-				endif;?>
-			<?php
-			wp_reset_postdata();
-			comments_template();
-
+	$categories = get_the_category();
+		foreach($categories as $category) {
+			if ( $category->name == 'Public Course' ) {
+				$permitted = TRUE;
+			}
+		}
+	if( $permitted ) {
+		the_post();
+				get_template_part( 'content', 'single' );
+				$query = new WP_Query( array( 'post_type' => 'course', 'post_parent' => $post->ID ) );
+					if( $query->have_posts() ) :
+					?>
+						<div class="entry-content hentry" itemprop="articleBody">
+							<h4 class="entry-title">Kursens delmoment</h4>
+							<hr>
+							<ul>
+								<?php
+								while( $query->have_posts() ) : $query->the_post();?>
+									<?php flat_hook_entry_top(); ?>
+									<li><h4><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></h4></li>
+									<?php flat_hook_entry_bottom();  
+								endwhile; ?>
+							</ul>
+						</div>
+						<?php
+					endif;?>
+				<?php
+				wp_reset_postdata();
+				comments_template();
+	}
+	else {
+		echo '<div class="entry-content hentry" itemprop="articleBody">
+			 		<h3>Du måste vara inloggad för att se detta innehåll</h3>
+			 	</div>';
+	}
 endif; ?>
 <?php get_footer(); ?>

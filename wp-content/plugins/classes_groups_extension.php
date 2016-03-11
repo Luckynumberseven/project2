@@ -20,9 +20,7 @@ function classes_groups_extension_admin_page() {
     print_classes();
     classes_admin_groups_add_submit();
     
-    
     ?>
-   
 
 </div>
 
@@ -55,12 +53,7 @@ function classes_admin_groups_add() {
     $group_table = _groups_get_tablename( 'group' );
     $parent_select = '<select name="parent-id-field">';
     $parent_select .= '<option value="">--</option>';
-    /*$groups = $wpdb->get_results( "SELECT * FROM $group_table" );
-    foreach ( $groups as $group ) {
-        $parent_select .= '<option value="' . esc_attr( $group->group_id ) . '">' . wp_filter_nohtml_kses( $group->name ) . '</option>';
-    }
-    $parent_select .= '</select>';*/
-
+    
     $output .= '<div class="manage-groups wrap">';
     $output .= '<h1>';
     $output .= __( 'Add a new class', GROUPS_PLUGIN_DOMAIN );
@@ -77,47 +70,6 @@ function classes_admin_groups_add() {
     $output .= '</label>';
     $output .= '<input id="name-field" name="name-field" class="namefield" type="text" value="' . esc_attr( stripslashes( $name ) ) . '"/>';
     $output .= '</div>';
-
-    /*$output .= '<div class="field">';
-    $output .= '<label for="parent-id-field" class="field-label">';
-    $output .= __( 'Parent', GROUPS_PLUGIN_DOMAIN );
-    $output .= '</label>';
-    $output .= $parent_select;
-    $output .= '</div>';*/
-
-    /*$output .= '<div class="field">';
-    $output .= '<label for="description-field" class="field-label description-field">';
-    $output .= __( 'Description', GROUPS_PLUGIN_DOMAIN );
-    $output .= '</label>';
-    $output .= '<textarea id="description-field" name="description-field" rows="5" cols="45">';
-    $output .= stripslashes( wp_filter_nohtml_kses( $description ) );
-    $output .= '</textarea>';
-    $output .= '</div>';*/
-
-    /*$output .= '<div class="field">';
-
-    $capability_table = _groups_get_tablename( "capability" );
-    $capabilities     = $wpdb->get_results( "SELECT * FROM $capability_table ORDER BY capability" );
-
-    $output .= '<div class="select-capability-container" style="width:62%;">';
-    $output .= '<label>';
-    $output .= __( 'Capabilities', GROUPS_PLUGIN_DOMAIN );
-    $output .= sprintf(
-        '<select class="select capability" name="capability_ids[]" multiple="multiple" placeholder="%s">',
-        __( 'Choose capabilities &hellip;', GROUPS_PLUGIN_DOMAIN )
-    );
-    foreach( $capabilities as $capability ) {
-        $output .= sprintf( '<option value="%s">%s</option>', esc_attr( $capability->capability_id ), wp_filter_nohtml_kses( $capability->capability ) );
-    }
-    $output .= '</select>';
-    $output .= '</label>';
-    $output .= '</div>';
-    $output .= '<p class="description">';
-    $output .= __( 'These capabilities will be assigned to the group.', GROUPS_PLUGIN_DOMAIN );
-    $output .= '</p>';
-
-    $output .= Groups_UIE::render_select( '.select.capability' );
-    $output .= '</div>';*/
 
     $output .= apply_filters( 'groups_admin_groups_add_form_after_fields', '' );
 
@@ -146,17 +98,21 @@ function print_classes() {
     echo $output;
 }
 
+function print_latest_class() {
+    global $wpdb;
+
+    $group_table = _groups_get_tablename( 'group' );
+    $groups = $wpdb->get_results( "SELECT * FROM $group_table ORDER BY wp_groups_group.datetime DESC LIMIT 1 " );
+    foreach ( $groups as $group ) {
+        $output .= '<p>'  . wp_filter_nohtml_kses( $group->name ) . '</p>';
+    }
+
+    echo $output;
+}
+
 function classes_admin_groups_add_submit() {
 
     global $wpdb;
-
-    if ( !current_user_can( GROUPS_ADMINISTER_GROUPS ) ) {
-        wp_die( __( 'Access denied.', GROUPS_PLUGIN_DOMAIN ) );
-    }
-
-    if ( !wp_verify_nonce( $_POST[GROUPS_ADMIN_GROUPS_NONCE], 'groups-add' ) ) {
-        wp_die( __( 'Access denied.', GROUPS_PLUGIN_DOMAIN ) );
-    }
 
     $creator_id  = get_current_user_id();
     $datetime    = date( 'Y-m-d H:i:s', time() );
@@ -168,7 +124,7 @@ function classes_admin_groups_add_submit() {
         "$name",
         'category',
         array(
-          'description' => 'This is an example category created with wp_insert_term.',
+          'description' => 'This is the category for '.$name.' class',
           'slug'        => "$name"
         )
     );
@@ -191,14 +147,13 @@ function classes_admin_groups_add_submit() {
     }
 
     return $group_id;
-} // function groups_admin_groups_add_submit
+} // function groups_admin_groups_add_submit 
 
 function classes_groups_extension_admin_menu(){
-    #add_options_page('Classes', 'Classes', 1, 'classes_groups_extension', 'classes_groups_extension_admin_page');
+    
     add_menu_page( 'Class manager', 'Classes', 'manage_options', 'classes_groups_extension', 'classes_groups_extension_admin_page', '', '35'
     );
 }
 
-add_action('admin_menu', 'classes_groups_extension_admin_menu');
-
-
+add_action('admin_menu', 'classes_groups_extension_admin_menu'); 
+add_action('groups_admin_groups_add_submit_success','print_latest_class');
